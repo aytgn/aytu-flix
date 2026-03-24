@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aytu-flix-dashboard-html
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="tr">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Aytu-Flix Sistem Merkezi</title>
+      <style>
+        body { background-color: #0b0f19; color: #f8fafc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        /* Başlığı daha büyük ve parıltılı yaptık */
+        h1 { color: #ffffff; margin-bottom: 50px; font-size: 4rem; text-shadow: 0 0 20px rgba(56, 189, 248, 0.8), 0 0 40px rgba(56, 189, 248, 0.4); font-weight: 800; }
+        .grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; width: 95%; max-width: 1100px; }
+        a { text-decoration: none; transition: transform 0.3s ease; }
+        a:hover { transform: translateY(-8px); }
+        .card { background: #1e293b; padding: 30px 25px; border-radius: 16px; text-align: center; color: white; font-weight: bold; font-size: 1.2rem; border: 1px solid #334155; box-shadow: 0 10px 20px rgba(0,0,0,0.3); min-width: 160px; }
+        /* Alt açıklamalar için stil */
+        .desc { display: block; font-size: 0.85rem; color: #94a3b8; font-weight: normal; margin-top: 8px; }
+        .card:hover { background: #26334d; }
+        /* Renk çizgilerini daha belirgin yaptık */
+        .card.jellyfin { border-bottom: 5px solid #aa5cc3; box-shadow: 0 4px 15px rgba(170, 92, 195, 0.3); }
+        .card.jellyseerr { border-bottom: 5px solid #ec4899; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); }
+        .card.radarr { border-bottom: 5px solid #ffc230; box-shadow: 0 4px 15px rgba(255, 194, 48, 0.3); }
+        .card.prowlarr { border-bottom: 5px solid #ff4e00; box-shadow: 0 4px 15px rgba(255, 78, 0, 0.3); }
+        .card.qbit { border-bottom: 5px solid #2b73b7; box-shadow: 0 4px 15px rgba(43, 115, 183, 0.3); }
+      </style>
+    </head>
+    <body>
+      <h1>🚀 Aytu-Flix</h1>
+      <div class="grid">
+        <a href="/jellyfin/"><div class="card jellyfin">🎬 Jellyfin <span class="desc">(İzle)</span></div></a>
+        <a href="/"><div class="card jellyseerr">🍿 Vitrin <span class="desc">(İstek)</span></div></a>
+        <a href="/radarr/"><div class="card radarr">🎥 Radarr <span class="desc">(Film)</span></div></a>
+        <a href="/prowlarr/"><div class="card prowlarr">🔍 Prowlarr <span class="desc">(İndex)</span></div></a>
+        <a href="/qbit/"><div class="card qbit">⬇️ qBittorrent <span class="desc">(İndirme)</span></div></a>
+      </div>
+    </body>
+    </html>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aytu-dashboard
+  template:
+    metadata:
+      labels:
+        app: aytu-dashboard
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: html-volume
+          mountPath: /usr/share/nginx/html/hub
+      volumes:
+      - name: html-volume
+        configMap:
+          name: aytu-flix-dashboard-html
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard-service
+spec:
+  type: ClusterIP
+  selector:
+    app: aytu-dashboard
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

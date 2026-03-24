@@ -1,0 +1,195 @@
+{"Protocol":0,"Id":"2b9e9f81aac51bc26ee378183e5a9d0b","Path":"/data/media/movies/Sherlock Holmes (2009)/Sherlock Holmes (2009) Bluray-1080p Proper.mkv","EncoderPath":null,"EncoderProtocol":null,"Type":0,"Container":"mkv","Size":6541571587,"Name":"Sherlock Holmes (2009) Bluray-1080p Proper","IsRemote":false,"ETag":"b5dcf5ded6fb0653954aed3314469ffe","RunTimeTicks":77047350000,"ReadAtNativeFramerate":false,"IgnoreDts":false,"IgnoreIndex":false,"GenPtsInput":false,"SupportsTranscoding":true,"SupportsDirectStream":true,"SupportsDirectPlay":true,"IsInfiniteStream":false,"UseMostCompatibleTranscodingProfile":false,"RequiresOpening":false,"OpenToken":null,"RequiresClosing":false,"LiveStreamId":null,"BufferMs":null,"RequiresLooping":false,"SupportsProbing":true,"VideoType":0,"IsoType":null,"Video3DFormat":null,"MediaStreams":[{"Codec":"hevc","CodecTag":null,"Language":null,"ColorRange":null,"ColorSpace":"bt709","ColorTransfer":"bt709","ColorPrimaries":"bt709","DvVersionMajor":null,"DvVersionMinor":null,"DvProfile":null,"DvLevel":null,"RpuPresentFlag":null,"ElPresentFlag":null,"BlPresentFlag":null,"DvBlSignalCompatibilityId":null,"Rotation":null,"Comment":null,"TimeBase":"1/1000","CodecTimeBase":null,"Title":"Sherlock.Holmes.2009.REPACK.1080p.BluRay.x265-YAWNTiC","Hdr10PlusPresentFlag":null,"VideoRange":1,"VideoRangeType":1,"VideoDoViTitle":null,"AudioSpatialFormat":0,"LocalizedUndefined":null,"LocalizedDefault":null,"LocalizedForced":null,"LocalizedExternal":null,"LocalizedHearingImpaired":null,"DisplayTitle":"Sherlock.Holmes.2009.REPACK.1080p.BluRay.x265-YAWNTiC - HEVC - SDR","NalLengthSize":null,"IsInterlaced":false,"IsAVC":false,"ChannelLayout":null,"BitRate":6792261,"BitDepth":10,"RefFrames":1,"PacketLength":null,"Channels":null,"SampleRate":null,"IsDefault":true,"IsForced":false,"IsHearingImpaired":false,"Height":1080,"Width":1920,"AverageFrameRate":23.976025,"RealFrameRate":23.976025,"ReferenceFrameRate":23.976025,"Profile":"Main 10","Type":1,"AspectRatio":"16:9","Index":0,"Score":null,"IsExternal":false,"DeliveryMethod":null,"DeliveryUrl":null,"IsExternalUrl":null,"IsTextSubtitleStream":false,"SupportsExternalStream":false,"Path":null,"PixelFormat":"yuv420p10le","Level":123,"IsAnamorphic":false},{"Codec":"ac3","CodecTag":null,"Language":"eng","ColorRange":null,"ColorSpace":null,"ColorTransfer":null,"ColorPrimaries":null,"DvVersionMajor":null,"DvVersionMinor":null,"DvProfile":null,"DvLevel":null,"RpuPresentFlag":null,"ElPresentFlag":null,"BlPresentFlag":null,"DvBlSignalCompatibilityId":null,"Rotation":null,"Comment":null,"TimeBase":"1/1000","CodecTimeBase":null,"Title":"AC-3 5.1 (YAWNTiC)","Hdr10PlusPresentFlag":null,"VideoRange":0,"VideoRangeType":0,"VideoDoViTitle":null,"AudioSpatialFormat":0,"LocalizedUndefined":null,"LocalizedDefault":"Default","LocalizedForced":null,"LocalizedExternal":"External","LocalizedHearingImpaired":null,"DisplayTitle":"AC-3 5.1 (YAWNTiC) - English - Dolby Digital - Default","NalLengthSize":null,"IsInterlaced":false,"IsAVC":false,"ChannelLayout":"5.1","BitRate":640000,"BitDepth":null,"RefFrames":null,"PacketLength":null,"Channels":6,"SampleRate":48000,"IsDefault":true,"IsForced":false,"IsHearingImpaired":false,"Height":null,"Width":null,"AverageFrameRate":null,"RealFrameRate":null,"ReferenceFrameRate":null,"Profile":null,"Type":0,"AspectRatio":null,"Index":1,"Score":null,"IsExternal":false,"DeliveryMethod":null,"DeliveryUrl":null,"IsExternalUrl":null,"IsTextSubtitleStream":false,"SupportsExternalStream":false,"Path":null,"PixelFormat":null,"Level":0,"IsAnamorphic":null},{"Codec":"PGSSUB","CodecTag":null,"Language":"eng","ColorRange":null,"ColorSpace":null,"ColorTransfer":null,"ColorPrimaries":null,"DvVersionMajor":null,"DvVersionMinor":null,"DvProfile":null,"DvLevel":null,"RpuPresentFlag":null,"ElPresentFlag":null,"BlPresentFlag":null,"DvBlSignalCompatibilityId":null,"Rotation":null,"Comment":null,"TimeBase":"1/1000","CodecTimeBase":null,"Title":"English (PGS)","Hdr10PlusPresentFlag":null,"VideoRange":0,"VideoRangeType":0,"VideoDoViTitle":null,"AudioSpatialFormat":0,"LocalizedUndefined":"Undefined","LocalizedDefault":"Default","LocalizedForced":"Forced","LocalizedExternal":"External","LocalizedHearingImpaired":"Hearing Impaired","DisplayTitle":"English (PGS) - PGSSUB","NalLengthSize":null,"IsInterlaced":false,"IsAVC":false,"ChannelLayout":null,"BitRate":null,"BitDepth":null,"RefFrames":null,"PacketLength":null,"Channels":null,"SampleRate":null,"IsDefault":false,"IsForced":false,"IsHearingImpaired":false,"Height":1080,"Width":1920,"AverageFrameRate":null,"RealFrameRate":null,"ReferenceFrameRate":null,"Profile":null,"Type":2,"AspectRatio":null,"Index":2,"Score":null,"IsExternal":false,"DeliveryMethod":null,"DeliveryUrl":null,"IsExternalUrl":null,"IsTextSubtitleStream":false,"SupportsExternalStream":true,"Path":null,"PixelFormat":null,"Level":0,"IsAnamorphic":null}],"MediaAttachments":[],"Formats":[],"Bitrate":7432261,"FallbackMaxStreamingBitrate":null,"Timestamp":null,"RequiredHttpHeaders":{},"TranscodingUrl":null,"TranscodingSubProtocol":0,"TranscodingContainer":null,"AnalyzeDurationMs":null,"DefaultAudioStreamIndex":null,"DefaultSubtitleStreamIndex":null,"HasSegments":false}
+
+/usr/lib/jellyfin-ffmpeg/ffmpeg -analyzeduration 200M -probesize 1G -ss 01:44:39.000 -noaccurate_seek  -i file:"/data/media/movies/Sherlock Holmes (2009)/Sherlock Holmes (2009) Bluray-1080p Proper.mkv" -map_metadata -1 -map_chapters -1 -threads 0 -map 0:0 -map 0:1 -map -0:s -codec:v:0 libx264 -preset veryfast -crf 23 -maxrate 11320435 -bufsize 22640870 -profile:v:0 high -level 51 -x264opts:0 subme=0:me_range=16:rc_lookahead=10:me=hex:open_gop=0 -force_key_frames:0 "expr:gte(t,n_forced*3)" -sc_threshold:v:0 0 -vf "setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709,scale=trunc(min(max(iw\,ih*a)\,min(1920\,1080*a))/2)*2:trunc(min(max(iw/a\,ih)\,min(1920/a\,1080))/2)*2,format=yuv420p" -codec:a:0 libfdk_aac -ac 2 -ab 256000 -af "volume=2" -copyts -avoid_negative_ts disabled -max_muxing_queue_size 2048 -f hls -max_delay 5000000 -hls_time 3 -hls_segment_type fmp4 -hls_fmp4_init_filename "d5f7d7dcd17467227fa20194089921df-1.mp4" -start_number 2093 -hls_segment_filename "/cache/transcodes/d5f7d7dcd17467227fa20194089921df%d.mp4" -hls_playlist_type vod -hls_list_size 0 -hls_segment_options movflags=+frag_discont -y "/cache/transcodes/d5f7d7dcd17467227fa20194089921df.m3u8"
+
+
+ffmpeg version 7.1.3-Jellyfin Copyright (c) 2000-2025 the FFmpeg developers
+  built with gcc 14 (Debian 14.2.0-19)
+  configuration: --prefix=/usr/lib/jellyfin-ffmpeg --target-os=linux --extra-version=Jellyfin --disable-doc --disable-ffplay --disable-static --disable-libxcb --disable-sdl2 --disable-xlib --enable-lto=auto --enable-gpl --enable-version3 --enable-shared --enable-gmp --enable-gnutls --enable-chromaprint --enable-opencl --enable-libdrm --enable-libxml2 --enable-libass --enable-libfreetype --enable-libfribidi --enable-libfontconfig --enable-libharfbuzz --enable-libbluray --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libopenmpt --enable-libdav1d --enable-libsvtav1 --enable-libwebp --enable-libvpx --enable-libx264 --enable-libx265 --enable-libzvbi --enable-libzimg --enable-libfdk-aac --arch=amd64 --enable-libshaderc --enable-libplacebo --enable-vulkan --enable-vaapi --enable-amf --enable-libvpl --enable-ffnvcodec --enable-cuda --enable-cuda-llvm --enable-cuvid --enable-nvdec --enable-nvenc
+  libavutil      59. 39.100 / 59. 39.100
+  libavcodec     61. 19.101 / 61. 19.101
+  libavformat    61.  7.100 / 61.  7.100
+  libavdevice    61.  3.100 / 61.  3.100
+  libavfilter    10.  4.100 / 10.  4.100
+  libswscale      8.  3.100 /  8.  3.100
+  libswresample   5.  3.100 /  5.  3.100
+  libpostproc    58.  3.100 / 58.  3.100
+Input #0, matroska,webm, from 'file:/data/media/movies/Sherlock Holmes (2009)/Sherlock Holmes (2009) Bluray-1080p Proper.mkv':
+  Metadata:
+    title           : Sherlock.Holmes.2009.REPACK.1080p.BluRay.x265-YAWNTiC
+    creation_time   : 2026-01-05T04:26:43.000000Z
+    COMMENT         : ::::: YAWNTiC Encode :::::
+    ENCODER         : Lavf62.0.100
+  Duration: 02:08:24.74, start: -0.005000, bitrate: 6792 kb/s
+  Chapters:
+    Chapter #0:0: start 0.000000, end 406.531000
+      Metadata:
+        title           : Chapter 1
+    Chapter #0:1: start 406.531000, end 690.231000
+      Metadata:
+        title           : Chapter 2
+    Chapter #0:2: start 690.231000, end 941.607000
+      Metadata:
+        title           : Chapter 3
+    Chapter #0:3: start 941.607000, end 1148.898000
+      Metadata:
+        title           : Chapter 4
+    Chapter #0:4: start 1148.898000, end 1409.074000
+      Metadata:
+        title           : Chapter 5
+    Chapter #0:5: start 1409.074000, end 1669.877000
+      Metadata:
+        title           : Chapter 6
+    Chapter #0:6: start 1669.877000, end 1921.253000
+      Metadata:
+        title           : Chapter 7
+    Chapter #0:7: start 1921.253000, end 2228.435000
+      Metadata:
+        title           : Chapter 8
+    Chapter #0:8: start 2228.435000, end 2450.406000
+      Metadata:
+        title           : Chapter 9
+    Chapter #0:9: start 2450.406000, end 2677.216000
+      Metadata:
+        title           : Chapter 10
+    Chapter #0:10: start 2677.216000, end 2859.690000
+      Metadata:
+        title           : Chapter 11
+    Chapter #0:11: start 2859.690000, end 3052.174000
+      Metadata:
+        title           : Chapter 12
+    Chapter #0:12: start 3052.174000, end 3317.606000
+      Metadata:
+        title           : Chapter 13
+    Chapter #0:13: start 3317.606000, end 3544.458000
+      Metadata:
+        title           : Chapter 14
+    Chapter #0:14: start 3544.458000, end 3784.781000
+      Metadata:
+        title           : Chapter 15
+    Chapter #0:15: start 3784.781000, end 3968.047000
+      Metadata:
+        title           : Chapter 16
+    Chapter #0:16: start 3968.047000, end 4274.103000
+      Metadata:
+        title           : Chapter 17
+    Chapter #0:17: start 4274.103000, end 4479.350000
+      Metadata:
+        title           : Chapter 18
+    Chapter #0:18: start 4479.350000, end 4656.318000
+      Metadata:
+        title           : Chapter 19
+    Chapter #0:19: start 4656.318000, end 5015.093000
+      Metadata:
+        title           : Chapter 20
+    Chapter #0:20: start 5015.093000, end 5166.953000
+      Metadata:
+        title           : Chapter 21
+    Chapter #0:21: start 5166.953000, end 5457.160000
+      Metadata:
+        title           : Chapter 22
+    Chapter #0:22: start 5457.160000, end 5715.376000
+      Metadata:
+        title           : Chapter 23
+    Chapter #0:23: start 5715.376000, end 5985.980000
+      Metadata:
+        title           : Chapter 24
+    Chapter #0:24: start 5985.980000, end 6258.002000
+      Metadata:
+        title           : Chapter 25
+    Chapter #0:25: start 6258.002000, end 6501.954000
+      Metadata:
+        title           : Chapter 26
+    Chapter #0:26: start 6501.954000, end 6842.711000
+      Metadata:
+        title           : Chapter 27
+    Chapter #0:27: start 6842.711000, end 6967.502000
+      Metadata:
+        title           : Chapter 28
+    Chapter #0:28: start 6967.502000, end 7226.177000
+      Metadata:
+        title           : Chapter 29
+    Chapter #0:29: start 7226.177000, end 7704.656000
+      Metadata:
+        title           : Chapter 30
+  Stream #0:0: Video: hevc (Main 10), yuv420p10le(tv, bt709), 1920x1080 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 1k tbn (default)
+      Metadata:
+        title           : Sherlock.Holmes.2009.REPACK.1080p.BluRay.x265-YAWNTiC
+        BPS             : 6136678
+        DURATION        : 02:08:24.697000000
+        NUMBER_OF_FRAMES: 184728
+        NUMBER_OF_BYTES : 5910156229
+        _STATISTICS_WRITING_APP: mkvmerge v96.0 ('It's My Life') 64-bit
+        _STATISTICS_WRITING_DATE_UTC: 2026-01-05 10:26:21
+        _STATISTICS_TAGS: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+  Stream #0:1(eng): Audio: ac3, 48000 Hz, 5.1(side), fltp, 640 kb/s (default)
+      Metadata:
+        title           : AC-3 5.1 (YAWNTiC)
+        ENCODER         : Lavc62.0.101 ac3
+        BPS             : 640000
+        DURATION        : 02:08:24.735000000
+        NUMBER_OF_FRAMES: 240773
+        NUMBER_OF_BYTES : 616378880
+        _STATISTICS_WRITING_APP: mkvmerge v96.0 ('It's My Life') 64-bit
+        _STATISTICS_WRITING_DATE_UTC: 2026-01-05 10:26:21
+        _STATISTICS_TAGS: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+  Stream #0:2(eng): Subtitle: hdmv_pgs_subtitle (pgssub), 1920x1080
+      Metadata:
+        title           : English (PGS)
+        BPS             : 30860
+        DURATION        : 02:08:00.214000000
+        NUMBER_OF_FRAMES: 3020
+        NUMBER_OF_BYTES : 29627337
+        _STATISTICS_WRITING_APP: mkvmerge v96.0 ('It's My Life') 64-bit
+        _STATISTICS_WRITING_DATE_UTC: 2026-01-05 10:26:21
+        _STATISTICS_TAGS: BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES
+Stream mapping:
+  Stream #0:0 -> #0:0 (hevc (native) -> h264 (libx264))
+  Stream #0:1 -> #0:1 (ac3 (native) -> aac (libfdk_aac))
+Press [q] to stop, [?] for help
+[libx264 @ 0x71a8202f6500] using SAR=1/1
+[libx264 @ 0x71a8202f6500] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x71a8202f6500] profile High, level 5.1, 4:2:0, 8-bit
+[libx264 @ 0x71a8202f6500] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=0 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=23 scenecut=0 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 vbv_maxrate=11320 vbv_bufsize=22640 crf_max=0.0 nal_hrd=none filler=0 ip_ratio=1.40 aq=1:1.00
+[hls @ 0x71a8202b7280] Opening '/cache/transcodes/d5f7d7dcd17467227fa20194089921df-1.mp4' for writing
+Output #0, hls, to '/cache/transcodes/d5f7d7dcd17467227fa20194089921df.m3u8':
+  Metadata:
+    encoder         : Lavf61.7.100
+  Stream #0:0: Video: h264, yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 23.98 fps, 24k tbn (default)
+      Metadata:
+        encoder         : Lavc61.19.101 libx264
+      Side data:
+        cpb: bitrate max/min/avg: 11320000/0/0 buffer size: 22640000 vbv_delay: N/A
+  Stream #0:1: Audio: aac, 48000 Hz, stereo, s16, 256 kb/s (default)
+      Metadata:
+        encoder         : Lavc61.19.101 libfdk_aac
+      Side data:
+        cpb: bitrate max/min/avg: 256000/256000/256000 buffer size: 0 vbv_delay: N/A
+frame=   12 fps=0.0 q=28.0 size=N/A time=00:00:00.00 bitrate=N/A speed=   0x    
+frame=   52 fps= 52 q=28.0 size=N/A time=00:00:01.66 bitrate=N/A speed=1.66x    
+[hls @ 0x71a8202b7280] Opening '/cache/transcodes/d5f7d7dcd17467227fa20194089921df2093.mp4' for writing
+frame=   89 fps= 59 q=28.0 size=N/A time=00:00:03.21 bitrate=N/A speed=2.14x    
+frame=  125 fps= 62 q=28.0 size=N/A time=00:00:04.71 bitrate=N/A speed=2.35x    
+[hls @ 0x71a8202b7280] Opening '/cache/transcodes/d5f7d7dcd17467227fa20194089921df2094.mp4' for writing
+
+
+[q] command received. Exiting.
+
+[hls @ 0x71a8202b7280] Opening '/cache/transcodes/d5f7d7dcd17467227fa20194089921df2095.mp4' for writing
+[out#0/hls @ 0x71a820281400] video:2050KiB audio:268KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=  203 fps= 70 q=-1.0 Lsize=N/A time=00:00:07.96 bitrate=N/A speed=2.77x    
+[libx264 @ 0x71a8202f6500] frame I:3     Avg QP:19.43  size:102285
+[libx264 @ 0x71a8202f6500] frame P:56    Avg QP:21.32  size: 24076
+[libx264 @ 0x71a8202f6500] frame B:144   Avg QP:24.70  size:  3081
+[libx264 @ 0x71a8202f6500] consecutive B-frames:  3.0%  5.9%  4.4% 86.7%
+[libx264 @ 0x71a8202f6500] mb I  I16..4: 23.9% 52.9% 23.2%
+[libx264 @ 0x71a8202f6500] mb P  I16..4:  6.0% 10.8%  2.4%  P16..4: 24.3%  7.1%  2.6%  0.0%  0.0%    skip:46.9%
+[libx264 @ 0x71a8202f6500] mb B  I16..4:  0.6%  0.7%  0.0%  B16..8:  8.6%  1.3%  0.1%  direct: 2.8%  skip:85.9%  L0:41.9% L1:46.9% BI:11.3%
+[libx264 @ 0x71a8202f6500] 8x8 transform intra:55.5% inter:59.1%
+[libx264 @ 0x71a8202f6500] coded y,uvDC,uvAC intra: 50.9% 31.2% 5.2% inter: 3.9% 2.4% 0.0%
+[libx264 @ 0x71a8202f6500] i16 v,h,dc,p: 47% 18% 15% 19%
+[libx264 @ 0x71a8202f6500] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 17% 15% 22%  8%  8%  8%  8%  6%  8%
+[libx264 @ 0x71a8202f6500] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 26% 19%  8%  8%  7%  8%  7%  7%  9%
+[libx264 @ 0x71a8202f6500] i8c dc,h,v,p: 56% 18% 20%  5%
+[libx264 @ 0x71a8202f6500] Weighted P-Frames: Y:8.9% UV:1.8%
+[libx264 @ 0x71a8202f6500] kb/s:1983.03

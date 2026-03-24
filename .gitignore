@@ -1,0 +1,4 @@
+storage/media_data/library/*
+!storage/media_data/library/.gitkeep
+storage/media_data/downloads/*
+!storage/media_data/downloads/.gitkeep

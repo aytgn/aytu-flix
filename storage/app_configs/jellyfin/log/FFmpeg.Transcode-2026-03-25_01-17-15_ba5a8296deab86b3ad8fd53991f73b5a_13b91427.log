@@ -1,0 +1,187 @@
+{"Protocol":0,"Id":"ba5a8296deab86b3ad8fd53991f73b5a","Path":"/data/media/movies/Toy Story (1995)/Toy Story (1995) Bluray-1080p Proper.mp4","EncoderPath":null,"EncoderProtocol":null,"Type":0,"Container":"mov,mp4,m4a,3gp,3g2,mj2","Size":1355450250,"Name":"Toy Story (1995) Bluray-1080p Proper","IsRemote":false,"ETag":"885c8a4b0a72f7b1ad2a09b413a911e9","RunTimeTicks":48634550000,"ReadAtNativeFramerate":false,"IgnoreDts":false,"IgnoreIndex":false,"GenPtsInput":false,"SupportsTranscoding":true,"SupportsDirectStream":true,"SupportsDirectPlay":true,"IsInfiniteStream":false,"UseMostCompatibleTranscodingProfile":false,"RequiresOpening":false,"OpenToken":null,"RequiresClosing":false,"LiveStreamId":null,"BufferMs":null,"RequiresLooping":false,"SupportsProbing":true,"VideoType":0,"IsoType":null,"Video3DFormat":null,"MediaStreams":[{"Codec":"hevc","CodecTag":"hev1","Language":"und","ColorRange":null,"ColorSpace":null,"ColorTransfer":null,"ColorPrimaries":null,"DvVersionMajor":null,"DvVersionMinor":null,"DvProfile":null,"DvLevel":null,"RpuPresentFlag":null,"ElPresentFlag":null,"BlPresentFlag":null,"DvBlSignalCompatibilityId":null,"Rotation":null,"Comment":null,"TimeBase":"1/24000","CodecTimeBase":null,"Title":null,"Hdr10PlusPresentFlag":null,"VideoRange":1,"VideoRangeType":1,"VideoDoViTitle":null,"AudioSpatialFormat":0,"LocalizedUndefined":null,"LocalizedDefault":null,"LocalizedForced":null,"LocalizedExternal":null,"LocalizedHearingImpaired":null,"DisplayTitle":"1080p HEVC SDR","NalLengthSize":null,"IsInterlaced":false,"IsAVC":false,"ChannelLayout":null,"BitRate":1998688,"BitDepth":10,"RefFrames":1,"PacketLength":null,"Channels":null,"SampleRate":null,"IsDefault":true,"IsForced":false,"IsHearingImpaired":false,"Height":1080,"Width":1920,"AverageFrameRate":23.976025,"RealFrameRate":23.976025,"ReferenceFrameRate":23.976025,"Profile":"Main 10","Type":1,"AspectRatio":"16:9","Index":0,"Score":null,"IsExternal":false,"DeliveryMethod":null,"DeliveryUrl":null,"IsExternalUrl":null,"IsTextSubtitleStream":false,"SupportsExternalStream":false,"Path":null,"PixelFormat":"yuv420p10le","Level":120,"IsAnamorphic":false},{"Codec":"aac","CodecTag":"mp4a","Language":"eng","ColorRange":null,"ColorSpace":null,"ColorTransfer":null,"ColorPrimaries":null,"DvVersionMajor":null,"DvVersionMinor":null,"DvProfile":null,"DvLevel":null,"RpuPresentFlag":null,"ElPresentFlag":null,"BlPresentFlag":null,"DvBlSignalCompatibilityId":null,"Rotation":null,"Comment":null,"TimeBase":"1/48000","CodecTimeBase":null,"Title":null,"Hdr10PlusPresentFlag":null,"VideoRange":0,"VideoRangeType":0,"VideoDoViTitle":null,"AudioSpatialFormat":0,"LocalizedUndefined":null,"LocalizedDefault":"Default","LocalizedForced":null,"LocalizedExternal":"External","LocalizedHearingImpaired":null,"DisplayTitle":"English - AAC - 5.1 - Default","NalLengthSize":null,"IsInterlaced":false,"IsAVC":false,"ChannelLayout":"5.1","BitRate":224001,"BitDepth":null,"RefFrames":null,"PacketLength":null,"Channels":6,"SampleRate":48000,"IsDefault":true,"IsForced":false,"IsHearingImpaired":false,"Height":null,"Width":null,"AverageFrameRate":null,"RealFrameRate":null,"ReferenceFrameRate":null,"Profile":"LC","Type":0,"AspectRatio":null,"Index":1,"Score":null,"IsExternal":false,"DeliveryMethod":null,"DeliveryUrl":null,"IsExternalUrl":null,"IsTextSubtitleStream":false,"SupportsExternalStream":false,"Path":null,"PixelFormat":null,"Level":0,"IsAnamorphic":null}],"MediaAttachments":[],"Formats":[],"Bitrate":2229608,"FallbackMaxStreamingBitrate":null,"Timestamp":null,"RequiredHttpHeaders":{},"TranscodingUrl":null,"TranscodingSubProtocol":0,"TranscodingContainer":null,"AnalyzeDurationMs":null,"DefaultAudioStreamIndex":null,"DefaultSubtitleStreamIndex":null,"HasSegments":false}
+
+/usr/lib/jellyfin-ffmpeg/ffmpeg -analyzeduration 200M -probesize 1G -ss 00:25:12.000 -noaccurate_seek  -i file:"/data/media/movies/Toy Story (1995)/Toy Story (1995) Bluray-1080p Proper.mp4" -map_metadata -1 -map_chapters -1 -threads 0 -map 0:0 -map 0:1 -map -0:s -codec:v:0 libx264 -preset veryfast -crf 23 -maxrate 8327867 -bufsize 16655734 -profile:v:0 high -level 51 -x264opts:0 subme=0:me_range=16:rc_lookahead=10:me=hex:open_gop=0 -force_key_frames:0 "expr:gte(t,n_forced*3)" -sc_threshold:v:0 0 -vf "setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709,scale=trunc(min(max(iw\,ih*a)\,min(1920\,1080*a))/2)*2:trunc(min(max(iw/a\,ih)\,min(1920/a\,1080))/2)*2,format=yuv420p" -codec:a:0 copy -copyts -avoid_negative_ts disabled -max_muxing_queue_size 2048 -f hls -max_delay 5000000 -hls_time 3 -hls_segment_type fmp4 -hls_fmp4_init_filename "f7f5658cd525c7b67a409d674b8a7fea-1.mp4" -start_number 504 -hls_segment_filename "/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea%d.mp4" -hls_playlist_type vod -hls_list_size 0 -hls_segment_options movflags=+frag_discont -y "/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea.m3u8"
+
+
+ffmpeg version 7.1.3-Jellyfin Copyright (c) 2000-2025 the FFmpeg developers
+  built with gcc 14 (Debian 14.2.0-19)
+  configuration: --prefix=/usr/lib/jellyfin-ffmpeg --target-os=linux --extra-version=Jellyfin --disable-doc --disable-ffplay --disable-static --disable-libxcb --disable-sdl2 --disable-xlib --enable-lto=auto --enable-gpl --enable-version3 --enable-shared --enable-gmp --enable-gnutls --enable-chromaprint --enable-opencl --enable-libdrm --enable-libxml2 --enable-libass --enable-libfreetype --enable-libfribidi --enable-libfontconfig --enable-libharfbuzz --enable-libbluray --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libopenmpt --enable-libdav1d --enable-libsvtav1 --enable-libwebp --enable-libvpx --enable-libx264 --enable-libx265 --enable-libzvbi --enable-libzimg --enable-libfdk-aac --arch=amd64 --enable-libshaderc --enable-libplacebo --enable-vulkan --enable-vaapi --enable-amf --enable-libvpl --enable-ffnvcodec --enable-cuda --enable-cuda-llvm --enable-cuvid --enable-nvdec --enable-nvenc
+  libavutil      59. 39.100 / 59. 39.100
+  libavcodec     61. 19.101 / 61. 19.101
+  libavformat    61.  7.100 / 61.  7.100
+  libavdevice    61.  3.100 / 61.  3.100
+  libavfilter    10.  4.100 / 10.  4.100
+  libswscale      8.  3.100 /  8.  3.100
+  libswresample   5.  3.100 /  5.  3.100
+  libpostproc    58.  3.100 / 58.  3.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'file:/data/media/movies/Toy Story (1995)/Toy Story (1995) Bluray-1080p Proper.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2mp41
+    creation_time   : 2020-07-26T13:12:07.000000Z
+    title           : Toy.Story.1995.PROPER.1080p.BluRay.x265-RARBG
+    encoder         : Lavf58.20.100
+    comment         : Toy.Story.1995.PROPER.1080p.BluRay.x265-RARBG
+  Duration: 01:21:03.46, start: 0.000000, bitrate: 2229 kb/s
+  Stream #0:0[0x1](und): Video: hevc (Main 10) (hev1 / 0x31766568), yuv420p10le(tv), 1920x1080 [SAR 1:1 DAR 16:9], 1998 kb/s, 23.98 fps, 23.98 tbr, 24k tbn (default)
+      Metadata:
+        creation_time   : 2020-07-26T13:12:07.000000Z
+        handler_name    : VideoHandler
+        vendor_id       : [0][0][0][0]
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, 5.1, fltp, 224 kb/s (default)
+      Metadata:
+        creation_time   : 2020-07-26T13:12:07.000000Z
+        handler_name    : SoundHandler
+        vendor_id       : [0][0][0][0]
+Stream mapping:
+  Stream #0:0 -> #0:0 (hevc (native) -> h264 (libx264))
+  Stream #0:1 -> #0:1 (copy)
+Press [q] to stop, [?] for help
+[libx264 @ 0x7600f30dde00] using SAR=1/1
+[libx264 @ 0x7600f30dde00] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x7600f30dde00] profile High, level 5.1, 4:2:0, 8-bit
+[libx264 @ 0x7600f30dde00] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=0 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=23 scenecut=0 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 vbv_maxrate=8327 vbv_bufsize=16655 crf_max=0.0 nal_hrd=none filler=0 ip_ratio=1.40 aq=1:1.00
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea-1.mp4' for writing
+Output #0, hls, to '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea.m3u8':
+  Metadata:
+    encoder         : Lavf61.7.100
+  Stream #0:0: Video: h264, yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 23.98 fps, 24k tbn (default)
+      Metadata:
+        encoder         : Lavc61.19.101 libx264
+      Side data:
+        cpb: bitrate max/min/avg: 8327000/0/0 buffer size: 16655000 vbv_delay: N/A
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, 5.1, fltp, 224 kb/s (default)
+frame=   25 fps=0.0 q=28.0 size=N/A time=00:00:00.00 bitrate=N/A speed=   0x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea504.mp4' for writing
+frame=   76 fps= 75 q=28.0 size=N/A time=00:00:02.12 bitrate=N/A speed=2.11x    
+frame=  117 fps= 78 q=28.0 size=N/A time=00:00:03.83 bitrate=N/A speed=2.55x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea505.mp4' for writing
+frame=  174 fps= 87 q=28.0 size=N/A time=00:00:06.21 bitrate=N/A speed= 3.1x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea506.mp4' for writing
+frame=  230 fps= 92 q=28.0 size=N/A time=00:00:08.55 bitrate=N/A speed=3.41x    
+frame=  288 fps= 96 q=28.0 size=N/A time=00:00:10.96 bitrate=N/A speed=3.65x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea507.mp4' for writing
+frame=  347 fps= 99 q=28.0 size=N/A time=00:00:13.43 bitrate=N/A speed=3.83x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea508.mp4' for writing
+frame=  392 fps= 98 q=28.0 size=N/A time=00:00:15.30 bitrate=N/A speed=3.82x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea509.mp4' for writing
+frame=  435 fps= 96 q=28.0 size=N/A time=00:00:17.10 bitrate=N/A speed=3.79x    
+frame=  501 fps=100 q=28.0 size=N/A time=00:00:19.85 bitrate=N/A speed=3.96x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea510.mp4' for writing
+frame=  542 fps= 98 q=28.0 size=N/A time=00:00:21.60 bitrate=N/A speed=3.92x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea511.mp4' for writing
+frame=  584 fps= 97 q=28.0 size=N/A time=00:00:23.31 bitrate=N/A speed=3.88x    
+frame=  622 fps= 96 q=28.0 size=N/A time=00:00:24.89 bitrate=N/A speed=3.82x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea512.mp4' for writing
+frame=  667 fps= 95 q=28.0 size=N/A time=00:00:26.77 bitrate=N/A speed=3.82x    
+frame=  708 fps= 94 q=28.0 size=N/A time=00:00:28.48 bitrate=N/A speed=3.79x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea513.mp4' for writing
+frame=  750 fps= 94 q=28.0 size=N/A time=00:00:30.23 bitrate=N/A speed=3.77x    
+frame=  791 fps= 93 q=28.0 size=N/A time=00:00:31.94 bitrate=N/A speed=3.75x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea514.mp4' for writing
+frame=  846 fps= 94 q=28.0 size=N/A time=00:00:34.24 bitrate=N/A speed= 3.8x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea515.mp4' for writing
+frame=  916 fps= 96 q=28.0 size=N/A time=00:00:37.16 bitrate=N/A speed=3.91x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea516.mp4' for writing
+frame=  981 fps= 98 q=28.0 size=N/A time=00:00:39.87 bitrate=N/A speed=3.98x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea517.mp4' for writing
+frame= 1036 fps= 99 q=28.0 size=N/A time=00:00:42.16 bitrate=N/A speed=4.01x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea518.mp4' for writing
+frame= 1085 fps= 99 q=28.0 size=N/A time=00:00:44.21 bitrate=N/A speed=4.01x    
+frame= 1138 fps= 99 q=28.0 size=N/A time=00:00:46.42 bitrate=N/A speed=4.03x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea519.mp4' for writing
+frame= 1193 fps= 99 q=28.0 size=N/A time=00:00:48.71 bitrate=N/A speed=4.05x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea520.mp4' for writing
+frame= 1246 fps=100 q=28.0 size=N/A time=00:00:50.92 bitrate=N/A speed=4.07x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea521.mp4' for writing
+frame= 1302 fps=100 q=28.0 size=N/A time=00:00:53.26 bitrate=N/A speed=4.09x    
+frame= 1346 fps=100 q=28.0 size=N/A time=00:00:55.09 bitrate=N/A speed=4.07x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea522.mp4' for writing
+frame= 1397 fps=100 q=28.0 size=N/A time=00:00:57.22 bitrate=N/A speed=4.08x    
+frame= 1439 fps= 99 q=28.0 size=N/A time=00:00:58.97 bitrate=N/A speed=4.06x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea523.mp4' for writing
+frame= 1484 fps= 99 q=28.0 size=N/A time=00:01:00.85 bitrate=N/A speed=4.05x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea524.mp4' for writing
+frame= 1537 fps= 99 q=28.0 size=N/A time=00:01:03.06 bitrate=N/A speed=4.06x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea525.mp4' for writing
+frame= 1593 fps= 99 q=28.0 size=N/A time=00:01:05.39 bitrate=N/A speed=4.08x    
+frame= 1641 fps= 99 q=28.0 size=N/A time=00:01:07.40 bitrate=N/A speed=4.08x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea526.mp4' for writing
+frame= 1694 fps= 99 q=28.0 size=N/A time=00:01:09.61 bitrate=N/A speed=4.09x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea527.mp4' for writing
+frame= 1740 fps= 99 q=28.0 size=N/A time=00:01:11.52 bitrate=N/A speed=4.08x    
+frame= 1791 fps= 99 q=28.0 size=N/A time=00:01:13.65 bitrate=N/A speed=4.09x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea528.mp4' for writing
+frame= 1837 fps= 99 q=28.0 size=N/A time=00:01:15.57 bitrate=N/A speed=4.08x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea529.mp4' for writing
+frame= 1892 fps= 99 q=28.0 size=N/A time=00:01:17.86 bitrate=N/A speed=4.09x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea530.mp4' for writing
+frame= 1944 fps=100 q=28.0 size=N/A time=00:01:20.03 bitrate=N/A speed= 4.1x    
+frame= 2002 fps=100 q=28.0 size=N/A time=00:01:22.45 bitrate=N/A speed=4.12x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea531.mp4' for writing
+frame= 2058 fps=100 q=28.0 size=N/A time=00:01:24.79 bitrate=N/A speed=4.13x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea532.mp4' for writing
+frame= 2103 fps=100 q=28.0 size=N/A time=00:01:26.66 bitrate=N/A speed=4.12x    
+frame= 2154 fps=100 q=25.0 size=N/A time=00:01:28.79 bitrate=N/A speed=4.12x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea533.mp4' for writing
+frame= 2205 fps=100 q=28.0 size=N/A time=00:01:30.92 bitrate=N/A speed=4.13x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea534.mp4' for writing
+frame= 2254 fps=100 q=28.0 size=N/A time=00:01:32.96 bitrate=N/A speed=4.13x    
+frame= 2300 fps=100 q=28.0 size=N/A time=00:01:34.88 bitrate=N/A speed=4.12x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea535.mp4' for writing
+frame= 2348 fps=100 q=28.0 size=N/A time=00:01:36.88 bitrate=N/A speed=4.12x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea536.mp4' for writing
+frame= 2406 fps=100 q=28.0 size=N/A time=00:01:39.30 bitrate=N/A speed=4.13x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea537.mp4' for writing
+frame= 2470 fps=101 q=28.0 size=N/A time=00:01:41.97 bitrate=N/A speed=4.16x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea538.mp4' for writing
+frame= 2529 fps=101 q=28.0 size=N/A time=00:01:44.43 bitrate=N/A speed=4.17x    
+frame= 2582 fps=101 q=28.0 size=N/A time=00:01:46.64 bitrate=N/A speed=4.18x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea539.mp4' for writing
+frame= 2630 fps=101 q=28.0 size=N/A time=00:01:48.65 bitrate=N/A speed=4.17x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea540.mp4' for writing
+frame= 2672 fps=101 q=28.0 size=N/A time=00:01:50.40 bitrate=N/A speed=4.16x    
+frame= 2732 fps=101 q=28.0 size=N/A time=00:01:52.90 bitrate=N/A speed=4.17x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea541.mp4' for writing
+frame= 2783 fps=101 q=28.0 size=N/A time=00:01:55.03 bitrate=N/A speed=4.18x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea542.mp4' for writing
+frame= 2829 fps=101 q=28.0 size=N/A time=00:01:56.95 bitrate=N/A speed=4.17x    
+frame= 2875 fps=101 q=28.0 size=N/A time=00:01:58.86 bitrate=N/A speed=4.16x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea543.mp4' for writing
+frame= 2918 fps=100 q=28.0 size=N/A time=00:02:00.66 bitrate=N/A speed=4.15x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea544.mp4' for writing
+frame= 2962 fps=100 q=28.0 size=N/A time=00:02:02.49 bitrate=N/A speed=4.15x    
+frame= 3013 fps=100 q=28.0 size=N/A time=00:02:04.62 bitrate=N/A speed=4.15x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea545.mp4' for writing
+frame= 3053 fps=100 q=28.0 size=N/A time=00:02:06.29 bitrate=N/A speed=4.13x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea546.mp4' for writing
+frame= 3102 fps=100 q=28.0 size=N/A time=00:02:08.33 bitrate=N/A speed=4.13x    
+frame= 3151 fps=100 q=28.0 size=N/A time=00:02:10.38 bitrate=N/A speed=4.13x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea547.mp4' for writing
+frame= 3206 fps=100 q=28.0 size=N/A time=00:02:12.67 bitrate=N/A speed=4.14x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea548.mp4' for writing
+frame= 3259 fps=100 q=28.0 size=N/A time=00:02:14.88 bitrate=N/A speed=4.14x    
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea549.mp4' for writing
+
+
+[q] command received. Exiting.
+
+[hls @ 0x7600f3098c80] Opening '/cache/transcodes/f7f5658cd525c7b67a409d674b8a7fea550.mp4' for writing
+[out#0/hls @ 0x7600f30817c0] video:43054KiB audio:3820KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame= 3350 fps=100 q=-1.0 Lsize=N/A time=00:02:18.64 bitrate=N/A speed=4.15x    
+[libx264 @ 0x7600f30dde00] frame I:47    Avg QP:17.43  size:143853
+[libx264 @ 0x7600f30dde00] frame P:972   Avg QP:20.52  size: 25884
+[libx264 @ 0x7600f30dde00] frame B:2331  Avg QP:24.81  size:  5219
+[libx264 @ 0x7600f30dde00] consecutive B-frames:  4.8%  5.1%  6.8% 83.3%
+[libx264 @ 0x7600f30dde00] mb I  I16..4: 24.1% 39.6% 36.4%
+[libx264 @ 0x7600f30dde00] mb P  I16..4:  7.0% 11.4%  2.8%  P16..4: 12.6%  4.2%  1.9%  0.0%  0.0%    skip:60.0%
+[libx264 @ 0x7600f30dde00] mb B  I16..4:  0.7%  1.7%  0.2%  B16..8:  6.8%  2.2%  0.2%  direct: 2.8%  skip:85.5%  L0:41.3% L1:45.3% BI:13.3%
+[libx264 @ 0x7600f30dde00] 8x8 transform intra:53.9% inter:38.6%
+[libx264 @ 0x7600f30dde00] coded y,uvDC,uvAC intra: 44.2% 64.1% 33.4% inter: 2.9% 6.3% 0.6%
+[libx264 @ 0x7600f30dde00] i16 v,h,dc,p: 59% 19%  8% 13%
+[libx264 @ 0x7600f30dde00] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 19% 18% 16%  8%  8%  8% 10%  7%  7%
+[libx264 @ 0x7600f30dde00] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 25% 24%  9%  7%  6%  6% 10%  6%  7%
+[libx264 @ 0x7600f30dde00] i8c dc,h,v,p: 37% 24% 26% 13%
+[libx264 @ 0x7600f30dde00] Weighted P-Frames: Y:3.7% UV:2.6%
+[libx264 @ 0x7600f30dde00] kb/s:2524.22

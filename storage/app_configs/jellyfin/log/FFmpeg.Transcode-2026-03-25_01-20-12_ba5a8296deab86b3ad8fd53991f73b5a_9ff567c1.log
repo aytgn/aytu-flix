@@ -1,0 +1,81 @@
+{"Protocol":0,"Id":"ba5a8296deab86b3ad8fd53991f73b5a","Path":"/data/media/movies/Toy Story (1995)/Toy Story (1995) Bluray-1080p Proper.mp4","EncoderPath":null,"EncoderProtocol":null,"Type":0,"Container":"mov,mp4,m4a,3gp,3g2,mj2","Size":1355450250,"Name":"Toy Story (1995) Bluray-1080p Proper","IsRemote":false,"ETag":"885c8a4b0a72f7b1ad2a09b413a911e9","RunTimeTicks":48634550000,"ReadAtNativeFramerate":false,"IgnoreDts":false,"IgnoreIndex":false,"GenPtsInput":false,"SupportsTranscoding":true,"SupportsDirectStream":true,"SupportsDirectPlay":true,"IsInfiniteStream":false,"UseMostCompatibleTranscodingProfile":false,"RequiresOpening":false,"OpenToken":null,"RequiresClosing":false,"LiveStreamId":null,"BufferMs":null,"RequiresLooping":false,"SupportsProbing":true,"VideoType":0,"IsoType":null,"Video3DFormat":null,"MediaStreams":[{"Codec":"hevc","CodecTag":"hev1","Language":"und","ColorRange":null,"ColorSpace":null,"ColorTransfer":null,"ColorPrimaries":null,"DvVersionMajor":null,"DvVersionMinor":null,"DvProfile":null,"DvLevel":null,"RpuPresentFlag":null,"ElPresentFlag":null,"BlPresentFlag":null,"DvBlSignalCompatibilityId":null,"Rotation":null,"Comment":null,"TimeBase":"1/24000","CodecTimeBase":null,"Title":null,"Hdr10PlusPresentFlag":null,"VideoRange":1,"VideoRangeType":1,"VideoDoViTitle":null,"AudioSpatialFormat":0,"LocalizedUndefined":null,"LocalizedDefault":null,"LocalizedForced":null,"LocalizedExternal":null,"LocalizedHearingImpaired":null,"DisplayTitle":"1080p HEVC SDR","NalLengthSize":null,"IsInterlaced":false,"IsAVC":false,"ChannelLayout":null,"BitRate":1998688,"BitDepth":10,"RefFrames":1,"PacketLength":null,"Channels":null,"SampleRate":null,"IsDefault":true,"IsForced":false,"IsHearingImpaired":false,"Height":1080,"Width":1920,"AverageFrameRate":23.976025,"RealFrameRate":23.976025,"ReferenceFrameRate":23.976025,"Profile":"Main 10","Type":1,"AspectRatio":"16:9","Index":0,"Score":null,"IsExternal":false,"DeliveryMethod":null,"DeliveryUrl":null,"IsExternalUrl":null,"IsTextSubtitleStream":false,"SupportsExternalStream":false,"Path":null,"PixelFormat":"yuv420p10le","Level":120,"IsAnamorphic":false},{"Codec":"aac","CodecTag":"mp4a","Language":"eng","ColorRange":null,"ColorSpace":null,"ColorTransfer":null,"ColorPrimaries":null,"DvVersionMajor":null,"DvVersionMinor":null,"DvProfile":null,"DvLevel":null,"RpuPresentFlag":null,"ElPresentFlag":null,"BlPresentFlag":null,"DvBlSignalCompatibilityId":null,"Rotation":null,"Comment":null,"TimeBase":"1/48000","CodecTimeBase":null,"Title":null,"Hdr10PlusPresentFlag":null,"VideoRange":0,"VideoRangeType":0,"VideoDoViTitle":null,"AudioSpatialFormat":0,"LocalizedUndefined":null,"LocalizedDefault":"Default","LocalizedForced":null,"LocalizedExternal":"External","LocalizedHearingImpaired":null,"DisplayTitle":"English - AAC - 5.1 - Default","NalLengthSize":null,"IsInterlaced":false,"IsAVC":false,"ChannelLayout":"5.1","BitRate":224001,"BitDepth":null,"RefFrames":null,"PacketLength":null,"Channels":6,"SampleRate":48000,"IsDefault":true,"IsForced":false,"IsHearingImpaired":false,"Height":null,"Width":null,"AverageFrameRate":null,"RealFrameRate":null,"ReferenceFrameRate":null,"Profile":"LC","Type":0,"AspectRatio":null,"Index":1,"Score":null,"IsExternal":false,"DeliveryMethod":null,"DeliveryUrl":null,"IsExternalUrl":null,"IsTextSubtitleStream":false,"SupportsExternalStream":false,"Path":null,"PixelFormat":null,"Level":0,"IsAnamorphic":null}],"MediaAttachments":[],"Formats":[],"Bitrate":2229608,"FallbackMaxStreamingBitrate":null,"Timestamp":null,"RequiredHttpHeaders":{},"TranscodingUrl":null,"TranscodingSubProtocol":0,"TranscodingContainer":null,"AnalyzeDurationMs":null,"DefaultAudioStreamIndex":null,"DefaultSubtitleStreamIndex":null,"HasSegments":false}
+
+/usr/lib/jellyfin-ffmpeg/ffmpeg -analyzeduration 200M -probesize 1G  -i file:"/data/media/movies/Toy Story (1995)/Toy Story (1995) Bluray-1080p Proper.mp4" -map_metadata -1 -map_chapters -1 -threads 0 -map 0:0 -map 0:1 -map -0:s -codec:v:0 libx264 -preset veryfast -crf 23 -maxrate 8327867 -bufsize 16655734 -profile:v:0 high -level 51 -x264opts:0 subme=0:me_range=16:rc_lookahead=10:me=hex:open_gop=0 -force_key_frames:0 "expr:gte(t,n_forced*3)" -sc_threshold:v:0 0 -vf "setparams=color_primaries=bt709:color_trc=bt709:colorspace=bt709,scale=trunc(min(max(iw\,ih*a)\,min(1920\,1080*a))/2)*2:trunc(min(max(iw/a\,ih)\,min(1920/a\,1080))/2)*2,format=yuv420p" -codec:a:0 copy -copyts -avoid_negative_ts disabled -max_muxing_queue_size 2048 -f hls -max_delay 5000000 -hls_time 3 -hls_segment_type fmp4 -hls_fmp4_init_filename "4b74e617fc3fdb06dbf99eb79e45214b-1.mp4" -start_number 0 -hls_segment_filename "/cache/transcodes/4b74e617fc3fdb06dbf99eb79e45214b%d.mp4" -hls_playlist_type vod -hls_list_size 0 -hls_segment_options movflags=+frag_discont -y "/cache/transcodes/4b74e617fc3fdb06dbf99eb79e45214b.m3u8"
+
+
+ffmpeg version 7.1.3-Jellyfin Copyright (c) 2000-2025 the FFmpeg developers
+  built with gcc 14 (Debian 14.2.0-19)
+  configuration: --prefix=/usr/lib/jellyfin-ffmpeg --target-os=linux --extra-version=Jellyfin --disable-doc --disable-ffplay --disable-static --disable-libxcb --disable-sdl2 --disable-xlib --enable-lto=auto --enable-gpl --enable-version3 --enable-shared --enable-gmp --enable-gnutls --enable-chromaprint --enable-opencl --enable-libdrm --enable-libxml2 --enable-libass --enable-libfreetype --enable-libfribidi --enable-libfontconfig --enable-libharfbuzz --enable-libbluray --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libopenmpt --enable-libdav1d --enable-libsvtav1 --enable-libwebp --enable-libvpx --enable-libx264 --enable-libx265 --enable-libzvbi --enable-libzimg --enable-libfdk-aac --arch=amd64 --enable-libshaderc --enable-libplacebo --enable-vulkan --enable-vaapi --enable-amf --enable-libvpl --enable-ffnvcodec --enable-cuda --enable-cuda-llvm --enable-cuvid --enable-nvdec --enable-nvenc
+  libavutil      59. 39.100 / 59. 39.100
+  libavcodec     61. 19.101 / 61. 19.101
+  libavformat    61.  7.100 / 61.  7.100
+  libavdevice    61.  3.100 / 61.  3.100
+  libavfilter    10.  4.100 / 10.  4.100
+  libswscale      8.  3.100 /  8.  3.100
+  libswresample   5.  3.100 /  5.  3.100
+  libpostproc    58.  3.100 / 58.  3.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'file:/data/media/movies/Toy Story (1995)/Toy Story (1995) Bluray-1080p Proper.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2mp41
+    creation_time   : 2020-07-26T13:12:07.000000Z
+    title           : Toy.Story.1995.PROPER.1080p.BluRay.x265-RARBG
+    encoder         : Lavf58.20.100
+    comment         : Toy.Story.1995.PROPER.1080p.BluRay.x265-RARBG
+  Duration: 01:21:03.46, start: 0.000000, bitrate: 2229 kb/s
+  Stream #0:0[0x1](und): Video: hevc (Main 10) (hev1 / 0x31766568), yuv420p10le(tv), 1920x1080 [SAR 1:1 DAR 16:9], 1998 kb/s, 23.98 fps, 23.98 tbr, 24k tbn (default)
+      Metadata:
+        creation_time   : 2020-07-26T13:12:07.000000Z
+        handler_name    : VideoHandler
+        vendor_id       : [0][0][0][0]
+  Stream #0:1[0x2](eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, 5.1, fltp, 224 kb/s (default)
+      Metadata:
+        creation_time   : 2020-07-26T13:12:07.000000Z
+        handler_name    : SoundHandler
+        vendor_id       : [0][0][0][0]
+Stream mapping:
+  Stream #0:0 -> #0:0 (hevc (native) -> h264 (libx264))
+  Stream #0:1 -> #0:1 (copy)
+Press [q] to stop, [?] for help
+[libx264 @ 0x7b66d02dde00] using SAR=1/1
+[libx264 @ 0x7b66d02dde00] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+[libx264 @ 0x7b66d02dde00] profile High, level 5.1, 4:2:0, 8-bit
+[libx264 @ 0x7b66d02dde00] 264 - core 164 r3108 31e19f9 - H.264/MPEG-4 AVC codec - Copyleft 2003-2023 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=0 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=16 chroma_me=1 trellis=0 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=250 keyint_min=23 scenecut=0 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 vbv_maxrate=8327 vbv_bufsize=16655 crf_max=0.0 nal_hrd=none filler=0 ip_ratio=1.40 aq=1:1.00
+[hls @ 0x7b66d0298c80] Opening '/cache/transcodes/4b74e617fc3fdb06dbf99eb79e45214b-1.mp4' for writing
+Output #0, hls, to '/cache/transcodes/4b74e617fc3fdb06dbf99eb79e45214b.m3u8':
+  Metadata:
+    encoder         : Lavf61.7.100
+  Stream #0:0: Video: h264, yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 23.98 fps, 24k tbn (default)
+      Metadata:
+        encoder         : Lavc61.19.101 libx264
+      Side data:
+        cpb: bitrate max/min/avg: 8327000/0/0 buffer size: 16655000 vbv_delay: N/A
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, 5.1, fltp, 224 kb/s (default)
+frame=   32 fps=0.0 q=28.0 size=N/A time=00:00:00.00 bitrate=N/A speed=   0x    
+[hls @ 0x7b66d0298c80] Opening '/cache/transcodes/4b74e617fc3fdb06dbf99eb79e45214b0.mp4' for writing
+frame=   80 fps= 80 q=28.0 size=N/A time=00:00:02.00 bitrate=N/A speed=   2x    
+frame=  122 fps= 81 q=28.0 size=N/A time=00:00:03.75 bitrate=N/A speed= 2.5x    
+[hls @ 0x7b66d0298c80] Opening '/cache/transcodes/4b74e617fc3fdb06dbf99eb79e45214b1.mp4' for writing
+
+
+[q] command received. Exiting.
+
+[hls @ 0x7b66d0298c80] Opening '/cache/transcodes/4b74e617fc3fdb06dbf99eb79e45214b2.mp4' for writing
+[out#0/hls @ 0x7b66d02817c0] video:1391KiB audio:223KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=  197 fps= 85 q=-1.0 Lsize=N/A time=00:00:06.81 bitrate=N/A dup=1 drop=0 speed=2.93x    
+[libx264 @ 0x7b66d02dde00] frame I:3     Avg QP:13.88  size: 24933
+[libx264 @ 0x7b66d02dde00] frame P:53    Avg QP:18.63  size: 13568
+[libx264 @ 0x7b66d02dde00] frame B:141   Avg QP:19.81  size:  4463
+[libx264 @ 0x7b66d02dde00] consecutive B-frames:  1.5%  6.1%  9.1% 83.2%
+[libx264 @ 0x7b66d02dde00] mb I  I16..4: 71.2% 27.2%  1.6%
+[libx264 @ 0x7b66d02dde00] mb P  I16..4: 33.6% 18.4%  0.2%  P16..4: 15.0%  1.4%  0.3%  0.0%  0.0%    skip:31.2%
+[libx264 @ 0x7b66d02dde00] mb B  I16..4:  4.4%  2.0%  0.0%  B16..8: 10.7%  1.4%  0.1%  direct:11.0%  skip:70.5%  L0:42.8% L1:52.8% BI: 4.5%
+[libx264 @ 0x7b66d02dde00] 8x8 transform intra:33.7% inter:42.5%
+[libx264 @ 0x7b66d02dde00] coded y,uvDC,uvAC intra: 11.2% 37.2% 3.1% inter: 0.6% 16.7% 0.0%
+[libx264 @ 0x7b66d02dde00] i16 v,h,dc,p: 58% 28%  6%  8%
+[libx264 @ 0x7b66d02dde00] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 12% 20% 36%  7%  6%  3%  6%  2%  6%
+[libx264 @ 0x7b66d02dde00] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 25% 28% 19%  5%  5%  4%  6%  3%  4%
+[libx264 @ 0x7b66d02dde00] i8c dc,h,v,p: 48% 30% 16%  6%
+[libx264 @ 0x7b66d02dde00] Weighted P-Frames: Y:24.5% UV:22.6%
+[libx264 @ 0x7b66d02dde00] kb/s:1385.62

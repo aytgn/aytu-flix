@@ -1,0 +1,15 @@
+{
+  "category": "General",
+  "changelog": "\u2728 New Features\r\n\r\n- Added support for 10.11.6",
+  "description": "Adds support for custom tabs to be added to the Jellyfin webpage. Commonly used to add Requests tab.",
+  "guid": "fbacd0b6-fd46-4a05-b0a4-2045d6a135b0",
+  "name": "Custom Tabs",
+  "owner": "IAmParadox27",
+  "targetAbi": "10.11.6.0",
+  "timestamp": "2025-11-03T22:24:54.0000000Z",
+  "version": "0.2.6.0",
+  "status": "Active",
+  "autoUpdate": true,
+  "imagePath": "/config/plugins/Custom Tabs_0.2.6.0/logo.png",
+  "assemblies": []
+}

@@ -33,12 +33,10 @@
   </SubtitleFetcherOrder>
   <DisabledMediaSegmentProviders />
   <MediaSegmentProviderOrder />
-  <SkipSubtitlesIfEmbeddedSubtitlesPresent>true</SkipSubtitlesIfEmbeddedSubtitlesPresent>
-  <SkipSubtitlesIfAudioTrackMatches>true</SkipSubtitlesIfAudioTrackMatches>
-  <SubtitleDownloadLanguages>
-    <string>tur</string>
-  </SubtitleDownloadLanguages>
-  <RequirePerfectSubtitleMatch>true</RequirePerfectSubtitleMatch>
+  <SkipSubtitlesIfEmbeddedSubtitlesPresent>false</SkipSubtitlesIfEmbeddedSubtitlesPresent>
+  <SkipSubtitlesIfAudioTrackMatches>false</SkipSubtitlesIfAudioTrackMatches>
+  <SubtitleDownloadLanguages />
+  <RequirePerfectSubtitleMatch>false</RequirePerfectSubtitleMatch>
   <SaveSubtitlesWithMedia>true</SaveSubtitlesWithMedia>
   <DisabledLyricFetchers />
   <LyricFetcherOrder />

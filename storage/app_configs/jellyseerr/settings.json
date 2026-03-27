@@ -76,7 +76,32 @@
    "id": 0
   }
  ],
- "sonarr": [],
+ "sonarr": [
+  {
+   "name": "Sonarr",
+   "hostname": "sonarr-service",
+   "port": 8989,
+   "apiKey": "9c4c677ef5de40d9b27b056b86857a00",
+   "useSsl": false,
+   "baseUrl": "/sonarr",
+   "activeProfileId": 1,
+   "activeProfileName": "Any",
+   "activeDirectory": "/data/library/series",
+   "activeAnimeProfileId": 1,
+   "activeAnimeProfileName": "Any",
+   "activeAnimeDirectory": "/data/library/series",
+   "tags": [],
+   "animeTags": [],
+   "is4k": false,
+   "isDefault": true,
+   "enableSeasonFolders": true,
+   "externalUrl": "http://localhost/sonarr",
+   "syncEnabled": false,
+   "preventSearch": false,
+   "tagRequests": false,
+   "id": 0
+  }
+ ],
  "public": {
   "initialized": true
  },

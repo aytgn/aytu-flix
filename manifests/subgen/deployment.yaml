@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: subgen
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: subgen
+  template:
+    metadata:
+      labels:
+        app: subgen
+    spec:
+      containers:
+      - name: subgen-container
+        image: mccloud/subgen:latest
+        ports:
+        - containerPort: 9000
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+
+        # --- SAAT AYARI ---
+        - name: TZ
+          value: "Europe/Istanbul"
+
+        # --- TEK SEFERDE TEK İŞ ---
+        - name: CONCURRENT_TRANSCRIPTIONS
+          value: "1"
+
+        # --- MODEL AYARLARI (GÜNCELLENDİ) ---
+        - name: WHISPER_MODEL
+          value: "base"
+        - name: WHISPER_COMPUTE_TYPE
+          value: "int8"
+        - name: WHISPER_THREADS
+          value: "2"
+
+        # --- ÇEVİRİ VE ÇİFT ALTYAZI ---
+        - name: TRANSCRIBE_OR_TRANSLATE
+          value: "transcribe"
+        - name: ADDITIONAL_LANGUAGES
+          value: "tr"
+        - name: APPEND_LANGUAGE_TO_FILENAME
+          value: "True"
+
+        # --- ATLANACAK DURUMLAR ---
+        - name: SKIP_IF_AUDIO_LANGUAGES
+          value: "tur|tr"
+
+        # --- JELLYFIN BAĞLANTI ---
+        - name: JELLYFIN_SERVER
+          value: "http://jellyfin-service:8096/jellyfin"
+        - name: JELLYFIN_TOKEN
+          value: "6c1bed94f67940e7ab669c1081a49631"
+
+        resources:
+          limits:
+            cpu: "2"
+            memory: "4Gi"
+          requests:
+            cpu: "1"
+            memory: "2Gi"
+        volumeMounts:
+        - name: media-storage
+          mountPath: /data/media
+          subPath: media_data/library
+      volumes:
+      - name: media-storage
+        persistentVolumeClaim:
+          claimName: storage-pvc

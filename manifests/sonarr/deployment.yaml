@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+      - name: sonarr
+        image: linuxserver/sonarr:latest
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Europe/Istanbul"
+        ports:
+        - containerPort: 8989
+        volumeMounts:
+        - name: config
+          mountPath: /config
+          subPath: app_configs/sonarr
+        - name: data
+          mountPath: /data
+          subPath: media_data
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: storage-pvc
+      - name: data
+        persistentVolumeClaim:
+          claimName: storage-pvc

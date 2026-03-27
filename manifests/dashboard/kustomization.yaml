@@ -1,0 +1,9 @@
+# ~/jellyfin_project/manifests/dashboard/kustomization.yaml
+resources:
+  - dashboard.yaml
+  - service.yaml
+
+configMapGenerator:
+  - name: aytu-flix-dashboard-html
+    files:
+      - index.html # Klasördeki index.html dosyasını otomatik ConfigMap yapar

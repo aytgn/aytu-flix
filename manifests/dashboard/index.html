@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aytu-Flix Sistem Merkezi</title>
+    <style>
+        body { background-color: #0b0f19; color: #f8fafc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 20px 20px 40px 20px; box-sizing: border-box; }
+
+        /* ANA BAŞLIK STİLİ */
+        h1 { color: #ffffff; margin-top: 50px; margin-bottom: 50px; font-size: 5rem; text-shadow: 0 0 20px rgba(56, 189, 248, 0.8), 0 0 40px rgba(56, 189, 248, 0.4); font-weight: 800; letter-spacing: 2px; transition: text-shadow 0.3s ease; }
+
+        /* --- KIRMIZI VE PARLAYAN XXX SINIFI --- */
+        .xxx { 
+            color: #e50914; 
+            text-shadow: 0 0 20px rgba(229, 9, 20, 0.8), 0 0 40px rgba(229, 9, 20, 0.4); 
+            letter-spacing: 1px;
+        }
+
+        a { text-decoration: none; transition: transform 0.3s ease; display: block; }
+        a:hover { transform: translateY(-8px); }
+
+        /* 1. KADEME: DEV KARTLAR (Jellyfin & Vitrin) */
+        .viewer-actions { display: flex; gap: 40px; justify-content: center; width: 100%; max-width: 1000px; margin-bottom: 60px; }
+        .viewer-actions a { flex: 1; }
+        .viewer-actions .card { background: #1e293b; padding: 5em; border-radius: 24px; font-size: 2.5rem; font-weight: bold; color: white; text-align: center; border: 1px solid #334155; transition: background 0.2s; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .viewer-actions .card:hover { background: #26334d; }
+        .viewer-actions .desc { display: block; font-size: 1.2rem; color: #94a3b8; margin-top: 15px; font-weight: normal; }
+
+        /* 2. VE 3. KADEME: SİSTEM VE GİZLİ KARTLAR (Aynı Boyut) */
+        .system-utilities, .nsfw-wrapper { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; width: 100%; max-width: 1100px; }
+        .system-utilities a, .nsfw-wrapper a { flex: 1 1 200px; max-width: 260px; }
+
+        .system-utilities .card, .nsfw-wrapper .card { background: #1e293b; padding: 30px 25px; border-radius: 166px; font-size: 1.2rem; font-weight: bold; color: white; text-align: center; border: 1px solid #334155; transition: background 0.2s; cursor: pointer; display: flex; flex-direction: column; align-items: center; }
+        .system-utilities .card:hover, .nsfw-wrapper .card:hover { background: #26334d; }
+        .system-utilities .desc, .nsfw-wrapper .desc { display: block; font-size: 0.85rem; color: #94a3b8; margin-top: 8px; font-weight: normal; }
+
+        /* GİZLİ BÖLÜM ÖZEL */
+        .nsfw-wrapper { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(51, 65, 85, 0.5); }
+
+        /* RENK VE GÖLGELER */
+        .card.jellyfin { border-bottom: 5px solid #aa5cc3; box-shadow: 0 4px 15px rgba(170, 92, 195, 0.3); }
+        .card.jellyseerr { border-bottom: 5px solid #ec4899; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3); }
+        .card.radarr { border-bottom: 5px solid #ffc230; box-shadow: 0 4px 15px rgba(255, 194, 48, 0.3); }
+        .card.sonarr { border-bottom: 5px solid #38bdf8; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); }
+        .card.prowlarr { border-bottom: 5px solid #ff4e00; box-shadow: 0 4px 15px rgba(255, 78, 0, 0.3); }
+        .card.qbit { border-bottom: 5px solid #2b73b7; box-shadow: 0 4px 15px rgba(43, 115, 183, 0.3); }
+        .card.stash { border-bottom: 5px solid #ff4757; box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3); }
+        .card.whisparr { border-bottom: 5px solid #5f27cd; box-shadow: 0 4px 15px rgba(95, 39, 205, 0.3); }
+        .card.filebrowser { border-bottom: 5px solid #475569; box-shadow: 0 4px 15px rgba(71, 85, 105, 0.3); }
+        
+	/* HAYALET BUTON: Sadece hover yapıldığında veya aktifken görünür */
+        .nsfw-btn { 
+            margin-top: 80px; 
+            padding: 12px 24px; 
+            background: transparent; 
+            color: #64748b; 
+            border: 1px dashed transparent; 
+            border-radius: 30px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: all 0.3s ease; 
+            font-family: inherit; 
+            font-size: 0.9rem; 
+            letter-spacing: 1px; 
+            opacity: 0;
+        }
+        .nsfw-btn:hover { 
+            opacity: 1; 
+            background: #1e293b; 
+            color: #f8fafc; 
+            border: 1px solid #64748b; 
+        }
+        .nsfw-btn.active { 
+            opacity: 1; 
+            background: rgba(229, 9, 20, 0.1); 
+            color: #e50914; 
+            border: 1px solid #e50914; 
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.2); 
+        }
+    </style>
+</head>
+<body>
+    <h1 id="mainTitle">🚀 AYTU-FLIX</h1>
+
+    <div class="viewer-actions">
+        <a href="/jellyfin/web/index.html" target="_blank"><div class="card jellyfin">🎬 Jellyfin <span class="desc">(İzle)</span></div></a>
+        <a href="/" target="_blank"><div class="card jellyseerr">🍿 Vitrin <span class="desc">(İstek)</span></div></a>
+    </div>
+
+    <div class="system-utilities">
+        <a href="/radarr/" target="_blank"><div class="card radarr">🎥 Radarr <span class="desc">(Film)</span></div></a>
+        <a href="/sonarr/" target="_blank"><div class="card sonarr">📺 Sonarr <span class="desc">(Dizi)</span></div></a>
+        <a href="/prowlarr/" target="_blank"><div class="card prowlarr">🔍 Prowlarr <span class="desc">(İndex)</span></div></a>
+        <a href="/qbit/" target="_blank"><div class="card qbit">⬇️ qBittorrent <span class="desc">(İndirme)</span></div></a>
+	<a href="/filebrowser/" target="_blank"><div class="card filebrowser">📁 Dosyalar <span class="desc">(Yönetici)</span></div></a>
+    </div>
+
+    <div id="nsfwWrapper" class="nsfw-wrapper">
+        <a href="#" onclick="window.open('https://stashdb.org', 'StashDB', 'width=1200,height=800')"><div class="card stash">🔥 StashDB <span class="desc">(Keşfet)</span></div></a>
+        <a href="/whisparr/" target="_blank"><div class="card whisparr">🔞 Whisparr <span class="desc">(Yönetim)</span></div></a>
+    </div>
+
+    <button id="nsfwBtn" class="nsfw-btn" onclick="toggleNsfw()">NSFW : KAPALI</button>
+
+    <script>
+        function toggleNsfw() {
+            const wrapper = document.getElementById("nsfwWrapper");
+            const btn = document.getElementById("nsfwBtn");
+            const title = document.getElementById("mainTitle"); // Başlığı seçtik
+
+            if (wrapper.style.display === "none" || wrapper.style.display === "") {
+                wrapper.style.display = "flex";
+                btn.className = "nsfw-btn active";
+                btn.innerText = "NSFW : AÇIK";
+                
+                // Başlığın sonuna kırmızı XXX ekle
+                title.innerHTML = '🚀 AYTU-FLI<span class="xxx">XXX</span>';
+            } else {
+                wrapper.style.display = "none";
+                btn.className = "nsfw-btn";
+                btn.innerText = "NSFW : KAPALI";
+                
+                // Başlığı eski haline döndür
+                title.innerText = '🚀 AYTU-FLIX';
+            }
+        }
+    </script>
+</body>
+</html>

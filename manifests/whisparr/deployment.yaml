@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whisparr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: whisparr
+  template:
+    metadata:
+      labels:
+        app: whisparr
+    spec:
+      containers:
+      - name: whisparr
+        image: ghcr.io/thespad/whisparr:latest
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: TZ
+          value: "Europe/Istanbul"
+        ports:
+        - containerPort: 6969
+        volumeMounts:
+        - name: config
+          mountPath: /config
+          subPath: app_configs/whisparr
+        - name: data
+          mountPath: /data
+          subPath: media_data
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: storage-pvc
+      - name: data
+        persistentVolumeClaim:
+          claimName: storage-pvc

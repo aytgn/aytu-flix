@@ -1,0 +1,96 @@
+# ==========================================
+# 1. BÖLÜM: TEMİZ YÖNLENDİRMELER (Rewritesiz)
+# ==========================================
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aytu-flix-clean-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      # --- FILEBROWSER BURADAN KALDIRILDI (Özel bölüme taşındı) ---
+      - path: /jellyfin
+        pathType: Prefix
+        backend:
+          service:
+            name: jellyfin-service
+            port:
+              number: 8096
+      - path: /radarr
+        pathType: Prefix
+        backend:
+          service:
+            name: radarr-service
+            port:
+              number: 7878
+      - path: /sonarr
+        pathType: Prefix
+        backend:
+          service:
+            name: sonarr-service
+            port:
+              number: 8989
+      - path: /prowlarr
+        pathType: Prefix
+        backend:
+          service:
+            name: prowlarr-service
+            port:
+              number: 9696
+      - path: /whisparr
+        pathType: Prefix
+        backend:
+          service:
+            name: whisparr-service
+            port:
+              number: 6969
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: jellyseerr-service
+            port:
+              number: 5055
+
+---
+# ==========================================
+# 2. BÖLÜM: ÖZEL REWRITE GEREKENLER (Hub & qBit & Filebrowser)
+# ==========================================
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: aytu-flix-special-ingress
+  annotations:
+    # Bu sihirli değnek yolu podun anlayacağı dile çevirir
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /hub(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: dashboard-service
+            port:
+              number: 80
+      - path: /qbit(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: qbittorrent-service
+            port:
+              number: 8081
+      # --- YENİ EKLENEN: FILEBROWSER ---
+      - path: /filebrowser(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: filebrowser-service
+            port:
+              number: 80

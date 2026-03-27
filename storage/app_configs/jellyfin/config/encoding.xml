@@ -4,7 +4,7 @@
   <EnableFallbackFont>false</EnableFallbackFont>
   <EnableAudioVbr>false</EnableAudioVbr>
   <DownMixAudioBoost>2</DownMixAudioBoost>
-  <DownMixStereoAlgorithm>None</DownMixStereoAlgorithm>
+  <DownMixStereoAlgorithm>Ac4</DownMixStereoAlgorithm>
   <MaxMuxingQueueSize>2048</MaxMuxingQueueSize>
   <EnableThrottling>false</EnableThrottling>
   <ThrottleDelaySeconds>180</ThrottleDelaySeconds>

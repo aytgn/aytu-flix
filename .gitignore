@@ -1,4 +1,16 @@
-storage/media_data/library/*
-!storage/media_data/library/.gitkeep
+# 1. GÜVENLİK KİLİDİ: Şifreler ve ortam değişkenleri
+*.env
+
+# 2. MEDYA VERİLERİ (Klasör kalsın, içi gitsin)
 storage/media_data/downloads/*
+storage/media_data/library/*
 !storage/media_data/downloads/.gitkeep
+!storage/media_data/library/.gitkeep
+
+# 3. APP KONFİGÜRASYONLARI (Klasör kalsın, ayar/db dosyaları gitsin)
+storage/app_configs/*/*
+!storage/app_configs/*/.gitkeep
+
+# 4. İŞLETİM SİSTEMİ ÇÖPLERİ
+.DS_Store
+Thumbs.db

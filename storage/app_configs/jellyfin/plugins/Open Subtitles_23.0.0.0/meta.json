@@ -1,7 +1,7 @@
 {
   "category": "Subtitles",
   "changelog": "- 5 requests per second, not 5 requests per 5 second (#175) @crobibero\n- Add bad subtitle handling (#165) @MBR-0001",
-  "description": "Download subtitles from the internet to use with your media files. (Requires configuration)",
+  "description": "",
   "guid": "4b9ed42f-5185-48b5-9803-6ff2989014c4",
   "name": "Open Subtitles",
   "overview": "Download subtitles for your media",

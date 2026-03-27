@@ -1,1 +1,1 @@
-{"StartTimeUtc":"2026-03-24T20:53:29.4086731Z","EndTimeUtc":"2026-03-24T20:53:29.4198813Z","Status":"Completed","Name":"Custom Tabs Startup","Key":"Jellyfin.Plugin.CustomTabs.Startup","Id":"d1c08aca22b2382aa2be88784fa858cd"}
+{"StartTimeUtc":"2026-03-27T15:03:30.1875678Z","EndTimeUtc":"2026-03-27T15:03:30.1975054Z","Status":"Completed","Name":"Custom Tabs Startup","Key":"Jellyfin.Plugin.CustomTabs.Startup","Id":"d1c08aca22b2382aa2be88784fa858cd"}

@@ -1,8 +1,17 @@
 {
+    "adult-whisparr": {
+        "save_path": ""
+    },
+    "movies-radarr": {
+        "save_path": ""
+    },
     "prowlarr": {
         "save_path": ""
     },
     "radarr": {
+        "save_path": ""
+    },
+    "tv-sonarr": {
         "save_path": ""
     }
 }

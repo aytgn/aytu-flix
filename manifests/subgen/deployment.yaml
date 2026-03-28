@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: subgen-container
-        image: mccloud/subgen:latest
+        image: mccloud/subgen:cpu  # CUDA kütüphanesiz, hafif CPU imajı
         ports:
         - containerPort: 9000
         env:
@@ -27,29 +27,33 @@ spec:
         - name: TZ
           value: "Europe/Istanbul"
 
-        # --- TEK SEFERDE TEK İŞ ---
+        # --- İŞ YÜKÜ VE İŞLEMCİ GÜCÜ ---
         - name: CONCURRENT_TRANSCRIPTIONS
           value: "1"
+        - name: WHISPER_THREADS
+          value: "4"  # CPU Limiti ile uyumlu 4 thread
 
-        # --- MODEL AYARLARI (GÜNCELLENDİ) ---
+        # --- YERELDE DİNLEME VE ÇIKTI ---
         - name: WHISPER_MODEL
           value: "base"
-        - name: WHISPER_COMPUTE_TYPE
-          value: "int8"
-        - name: WHISPER_THREADS
-          value: "2"
-
-        # --- ÇEVİRİ VE ÇİFT ALTYAZI ---
+        - name: TRANSCRIBE_DEVICE
+          value: "cpu"
+        - name: WHISPER_VAD_FILTER
+          value: "True"   # Sessizlikleri atla
+        - name: WHISPER_BEAM_SIZE
+          value: "3"      # Daha az düşün, daha hızlı yaz
         - name: TRANSCRIBE_OR_TRANSLATE
           value: "transcribe"
-        - name: ADDITIONAL_LANGUAGES
-          value: "tr"
         - name: APPEND_LANGUAGE_TO_FILENAME
           value: "True"
 
-        # --- ATLANACAK DURUMLAR ---
-        - name: SKIP_IF_AUDIO_LANGUAGES
-          value: "tur|tr"
+        # --- HUGGING FACE KİMLİK DOĞRULAMASI ---
+        - name: HF_TOKEN
+          value: "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"
+
+        # --- ATLANACAK DURUMLAR (HERHANGİ BİR ALTYAZI VARSA ATLA) ---
+        - name: SKIP_IF_EXTERNAL_SUBTITLES_EXIST
+          value: "True"
 
         # --- JELLYFIN BAĞLANTI ---
         - name: JELLYFIN_SERVER
@@ -59,11 +63,11 @@ spec:
 
         resources:
           limits:
-            cpu: "2"
-            memory: "4Gi"
+            cpu: "4"       # Üst sınır 4 çekirdek
+            memory: "6Gi"  # RAM sınırı 6GB
           requests:
-            cpu: "1"
-            memory: "2Gi"
+            cpu: "2"       # Minimum garanti edilen
+            memory: "4Gi"
         volumeMounts:
         - name: media-storage
           mountPath: /data/media

@@ -61,6 +61,12 @@ spec:
         - name: JELLYFIN_TOKEN
           value: "6c1bed94f67940e7ab669c1081a49631"
 
+        # --- DİL ALGILAMA (JENERİK VE SES EFEKTİ ATLAMA) ---
+        - name: DETECT_LANGUAGE_OFFSET
+          value: "300"    # İlk 5 dakikayı atla (intro ve müzikler biter)
+        - name: DETECT_LANGUAGE_LENGTH
+          value: "60"     # Sonraki 60 saniyeyi dinleyip dili netleştir
+
         resources:
           limits:
             cpu: "4"       # Üst sınır 4 çekirdek

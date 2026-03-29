@@ -18,5 +18,3 @@ nodes:
   extraMounts:
   - hostPath: /home/aytu/jellyfin_project/storage
     containerPath: /mnt/storage
-  - hostPath: /home/aytu/jellyfin_project/app_configs  # <-- YENİ EKLENEN
-    containerPath: /mnt/app_configs                    # <-- YENİ EKLENEN

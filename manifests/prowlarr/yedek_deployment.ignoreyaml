@@ -29,8 +29,8 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /config
-          subPath: prowlarr          # config-pvc içindeki prowlarr klasörü
+          subPath: app_configs/prowlarr
       volumes:
       - name: config
         persistentVolumeClaim:
-          claimName: config-pvc      # Hızlı SSD diskimiz
+          claimName: storage-pvc

@@ -25,16 +25,19 @@ spec:
         ports:
         - containerPort: 6969
         volumeMounts:
-        - name: config
+        - name: config-vol
           mountPath: /config
-          subPath: app_configs/whisparr
-        - name: data
+          subPath: whisparr          # config-pvc (SSD) içindeki whisparr klasörü
+        - name: config-vol
+          mountPath: /downloads
+          subPath: downloads         # qBittorrent'in indirdiklerini okumak için SSD
+        - name: data-vol
           mountPath: /data
-          subPath: media_data
+          subPath: media_data        # storage-pvc (GDrive) içindeki ana medya yolu
       volumes:
-      - name: config
+      - name: config-vol
         persistentVolumeClaim:
-          claimName: storage-pvc
-      - name: data
+          claimName: config-pvc      # Beyin: Ayarlar, DB ve geçici indirmeler (SSD)
+      - name: data-vol
         persistentVolumeClaim:
-          claimName: storage-pvc
+          claimName: storage-pvc     # Kas: Devasa arşiv (GDrive)

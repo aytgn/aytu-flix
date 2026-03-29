@@ -12,10 +12,10 @@ if ! kind get clusters | grep -q "^$CLUSTER_NAME$"; then
     echo "🆕 Cluster bulunamadı! Yerel dosyalardan inşa ediliyor..."
     kind create cluster --name "$CLUSTER_NAME" --config "$CONFIG_PATH"
 
-    # 1. Önce Ingress Controller'ı (Kapıyı) kur
+    # Ingress Controller yolunu BASE klasörü olarak güncelledik
     echo "🌐 Ingress Controller kuruluyor (Local)..."
-    kubectl apply -f "$MANIFEST_DIR/nginx-ingress.yaml"
-    
+    kubectl apply -f "$MANIFEST_DIR/BASE/nginx-ingress.yaml"
+
     # Nginx'in uyanmasını bekle
     echo "⏳ Ingress Controller'ın hazır olması bekleniyor (Bu işlem 1-2 dakika sürebilir)..."
     kubectl wait --namespace ingress-nginx \
@@ -25,14 +25,18 @@ if ! kind get clusters | grep -q "^$CLUSTER_NAME$"; then
     # KÖKTEN ÇÖZÜM: O inatçı Webhook güvenlik duvarını anında yok ediyoruz
     echo "🛡️ Baş belası Webhook güvenlik duvarı devreden çıkarılıyor..."
     kubectl delete validatingwebhookconfiguration ingress-nginx-admission --ignore-not-found=true
-    
+
     # Sistemin silme işlemini sindirmesi için çok ufak bir esneme payı
-    sleep 2 
+    sleep 2
 
     # 2. Şimdi Aytu-Flix Donanmasını Ateşle
     echo "📦 Tüm uygulamalar ve kurallar (PV, Master Ingress, Podlar) yükleniyor..."
     kubectl apply -f "$MANIFEST_DIR" --recursive
     
+    # 3. Kustomize ile Dashboard'u özel olarak bas
+    echo "📊 Dashboard Kustomize ile ayağa kaldırılıyor..."
+    kubectl apply -k "$MANIFEST_DIR/dashboard/"
+
     echo "🎬 Aytu-Flix kurulumu tamamlandı ve yayına hazır!"
     exit 0
 fi

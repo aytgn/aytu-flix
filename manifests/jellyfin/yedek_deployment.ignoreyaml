@@ -29,14 +29,14 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /config
-          subPath: jellyfin          # Sadece config-pvc içindeki jellyfin klasörüne yazar
+          subPath: app_configs/jellyfin
         - name: media
           mountPath: /data/media
-          subPath: media_data/library # storage-pvc (GDrive) içindeki film kütüphanesine bakar
+          subPath: media_data/library
       volumes:
       - name: config
         persistentVolumeClaim:
-          claimName: config-pvc      # Hızlı SSD beynimiz
+          claimName: storage-pvc
       - name: media
         persistentVolumeClaim:
-          claimName: storage-pvc     # Buluttaki medya depomuz
+          claimName: storage-pvc

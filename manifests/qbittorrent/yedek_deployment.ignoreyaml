@@ -29,13 +29,13 @@ spec:
         ports:
         - containerPort: 8081
         volumeMounts:
-        - name: config-vol
+        - name: all-data
           mountPath: /config
-          subPath: qbittorrent       # Ayarlar SSD'de
-        - name: config-vol
+          subPath: app_configs/qbittorrent
+        - name: all-data
           mountPath: /downloads
-          subPath: downloads         # İndirmeler de SSD'de (Google Drive yok)
+          subPath: media_data/downloads
       volumes:
-      - name: config-vol
+      - name: all-data
         persistentVolumeClaim:
-          claimName: config-pvc      # Tamamen hızlı lokal disk (SSD)
+          claimName: storage-pvc

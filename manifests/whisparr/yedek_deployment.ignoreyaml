@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sonarr
+  name: whisparr
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sonarr
+      app: whisparr
   template:
     metadata:
       labels:
-        app: sonarr
+        app: whisparr
     spec:
       containers:
-      - name: sonarr
-        image: linuxserver/sonarr:latest
+      - name: whisparr
+        image: ghcr.io/thespad/whisparr:latest
         env:
         - name: PUID
           value: "1000"
@@ -23,21 +23,18 @@ spec:
         - name: TZ
           value: "Europe/Istanbul"
         ports:
-        - containerPort: 8989
+        - containerPort: 6969
         volumeMounts:
-        - name: config-vol
+        - name: config
           mountPath: /config
-          subPath: sonarr
-        - name: config-vol
-          mountPath: /downloads
-          subPath: downloads       # qBittorrent'in indirdiklerini okumak için SSD'ye bakar
-        - name: data-vol
+          subPath: app_configs/whisparr
+        - name: data
           mountPath: /data
           subPath: media_data
       volumes:
-      - name: config-vol
+      - name: config
         persistentVolumeClaim:
-          claimName: config-pvc
-      - name: data-vol
+          claimName: storage-pvc
+      - name: data
         persistentVolumeClaim:
           claimName: storage-pvc

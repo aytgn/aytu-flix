@@ -27,16 +27,19 @@ spec:
         ports:
         - containerPort: 7878
         volumeMounts:
-        - name: config
+        - name: config-vol
           mountPath: /config
-          subPath: app_configs/radarr
-        - name: data
+          subPath: radarr          # Ayarlar SSD'de
+        - name: config-vol
+          mountPath: /downloads
+          subPath: downloads       # qBittorrent'in indirdiklerini okumak için SSD'ye bakar
+        - name: data-vol
           mountPath: /data
-          subPath: media_data
+          subPath: media_data      # Kendi kütüphanesi Google Drive'da
       volumes:
-      - name: config
+      - name: config-vol
         persistentVolumeClaim:
-          claimName: storage-pvc
-      - name: data
+          claimName: config-pvc    # SSD (Okuma noktası)
+      - name: data-vol
         persistentVolumeClaim:
-          claimName: storage-pvc
+          claimName: storage-pvc   # GDrive (Yazma noktası)

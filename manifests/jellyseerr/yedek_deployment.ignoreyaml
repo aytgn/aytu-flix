@@ -27,8 +27,8 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /app/config
-          subPath: jellyseerr        # config-pvc içindeki jellyseerr klasörüne yönlendirir
+          subPath: app_configs/jellyseerr
       volumes:
       - name: config
         persistentVolumeClaim:
-          claimName: config-pvc      # Hızlı SSD diskimiz
+          claimName: storage-pvc

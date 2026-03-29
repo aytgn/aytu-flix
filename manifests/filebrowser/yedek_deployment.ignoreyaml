@@ -29,15 +29,12 @@ spec:
         ports:
         - containerPort: 80
         volumeMounts:
-        - name: config-vol
+        - name: storage
           mountPath: /config
-          subPath: filebrowser    # Sadece config-pvc içindeki filebrowser klasörüne yazar
-        - name: data-vol
-          mountPath: /srv         # storage-pvc'nin tamamını (GDrive) srv klasöründe gösterir
+          subPath: app_configs/filebrowser
+        - name: storage
+          mountPath: /srv
       volumes:
-      - name: config-vol
+      - name: storage
         persistentVolumeClaim:
-          claimName: config-pvc   # Hızlı çalışan SSD beynimiz
-      - name: data-vol
-        persistentVolumeClaim:
-          claimName: storage-pvc  # Buluttaki devasa depomuz
+          claimName: storage-pvc

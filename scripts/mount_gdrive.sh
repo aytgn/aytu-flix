@@ -36,18 +36,18 @@ fi
 # 2. Yeni ve güvenli (API & SSD dostu) ayarlarla mount et
 echo "🚀 Yeni Rclone zırhıyla Google Drive bağlanıyor..."
 
+# ... scriptin diğer kısımları aynı ...
+
 rclone mount "$REMOTE_NAME:AYTU-FLIX-DATA" "$MOUNT_PATH" \
   --config "$CONFIG_PATH" \
   --allow-other \
+  --allow-non-empty \
   --vfs-cache-mode full \
   --vfs-cache-max-size 50G \
-  --vfs-cache-max-age 24h \
-  --vfs-read-chunk-size 128M \
-  --vfs-read-chunk-size-limit 2G \
-  --buffer-size 64M \
+  --vfs-read-ahead 128M \
+  --attr-timeout 1000h \
   --dir-cache-time 1000h \
-  --drive-chunk-size 128M \
-  --umask 002 \
+  --buffer-size 64M \
   --daemon
 
 echo "✅ İşlem tamam! Google Drive başarıyla $MOUNT_PATH adresine bağlandı."

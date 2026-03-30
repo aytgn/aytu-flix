@@ -1,53 +1,78 @@
 #!/bin/bash
 
-# ==============================================================================
-# ADIM 1 (HAZIRLIK - FUSE İŞLEMİ):
-# Bu scriptin Docker/Kind içinde düzgün çalışması için şu işlemi yapmış olmalısın:
-# 1. 'sudo nano /etc/fuse.conf' komutunu çalıştır.
-# 2. '#user_allow_other' satırının başındaki '#' işaretini kaldır ve kaydet.
-# ==============================================================================
+# --- TANIMLAMALAR ---
+PROJECT_DIR="$HOME/aytu-flix"
+MOUNT_POINT="$PROJECT_DIR/storage"
+REMOTE_PATH="gdrive:AYTU-FLIX-DATA"
+LOG_FILE="$PROJECT_DIR/rclone.log"
+CLUSTER_NAME="jelly-lab"
+CONTROL_PLANE="${CLUSTER_NAME}-control-plane"
 
+echo "🛑 ADIM 1: Cluster güvenli bir şekilde durduruluyor..."
+STATUS=$(docker inspect -f '{{.State.Status}}' "$CONTROL_PLANE" 2>/dev/null)
 
-# 1. Değişkenleri tanımla ve script sonrasında da kullanılabilmesi için 'export' et
-export REMOTE_NAME="gdrive"  # Kendi rclone remote ismin neyse onu yaz
-export MOUNT_PATH="/home/aytu/jellyfin_project/storage"
-export CONFIG_PATH="/home/aytu/.config/rclone/rclone.conf" # Kendi config yolunu yaz
-
-echo "🔄 Rclone mount işlemi başlatılıyor..."
-
-# 3. Takılı varsa çıkar ve temizle
-echo "🧹 Eski bağlantılar kontrol ediliyor ve temizleniyor..."
-
-# Eğer mount path doluysa/takılıysa zorla unmount et (hata verirse yoksay)
-fusermount -uz "$MOUNT_PATH" 2>/dev/null
-
-# Arka planda bu yola takılı kalmış rclone süreçleri varsa sadece onları öldür
-pkill -f "rclone mount.*$MOUNT_PATH" 2>/dev/null
-
-# Sistemin unmount işlemini sindirmesi için ufak bir bekleme
-sleep 2
-
-# Mount klasörü yoksa oluştur
-if [ ! -d "$MOUNT_PATH" ]; then
-    echo "📁 Mount klasörü oluşturuluyor: $MOUNT_PATH"
-    mkdir -p "$MOUNT_PATH"
+if [ "$STATUS" == "running" ]; then
+    echo "💤 KinD Cluster ($CLUSTER_NAME) uyku moduna alınıyor..."
+    docker stop "$CONTROL_PLANE"
+    echo "✅ Cluster durduruldu."
+else
+    echo "🥱 Cluster zaten çalışmıyor, temizlik adımına geçiliyor."
 fi
 
-# 2. Yeni ve güvenli (API & SSD dostu) ayarlarla mount et
-echo "🚀 Yeni Rclone zırhıyla Google Drive bağlanıyor..."
+# --- 2. ADIM: ESKİ BAĞLANTIYI TEMİZLE ---
+if mountpoint -q "$MOUNT_POINT"; then
+    echo "⚠️ Eski bağlantı sökülüyor..."
+    fusermount -uz "$MOUNT_POINT"
+    sleep 2
+fi
 
-# ... scriptin diğer kısımları aynı ...
+# --- 3. ADIM: GÜVENLİK VE YETKİ ---
+echo "🔓 Bağlantı noktası yetkileri açılıyor (chmod 755)..."
+mkdir -p "$MOUNT_POINT"
+chmod 755 "$MOUNT_POINT"
 
-rclone mount "$REMOTE_NAME:AYTU-FLIX-DATA" "$MOUNT_PATH" \
-  --config "$CONFIG_PATH" \
+# Kazaara dosya yazıldıysa dur ve kilitle
+if [ "$(ls -A "$MOUNT_POINT")" ]; then
+    echo "❌ HATA: $MOUNT_POINT boş değil! Kaçak dosyalar var."
+    echo "🔒 Güvenlik için klasör kilitleniyor (chmod 000)."
+    chmod 000 "$MOUNT_POINT"
+    exit 1
+fi
+
+# --- 4. ADIM: OPTİMİZE RCLONE MOUNT (Streaming & API Friendly) ---
+echo "⏳ Google Drive bağlanıyor (Optimize ayarlarla)..."
+rclone mount "$REMOTE_PATH" "$MOUNT_POINT" \
   --allow-other \
-  --allow-non-empty \
   --vfs-cache-mode full \
-  --vfs-cache-max-size 50G \
-  --vfs-read-ahead 128M \
-  --attr-timeout 1000h \
-  --dir-cache-time 1000h \
-  --buffer-size 64M \
-  --daemon
+  --vfs-cache-max-size 20G \
+  --vfs-cache-max-age 24h \
+  --vfs-disk-space-total-size 1T \
+  --buffer-size 128M \
+  --vfs-read-chunk-size 128M \
+  --vfs-read-chunk-size-limit off \
+  --dir-cache-time 5m \
+  --poll-interval 15s \
+  --no-checksum \
+  --no-modtime \
+  --drive-chunk-size 64M \
+  --log-level INFO \
+  --log-file "$LOG_FILE" \
+  --daemon \
+  --allow-non-empty
 
-echo "✅ İşlem tamam! Google Drive başarıyla $MOUNT_PATH adresine bağlandı."
+# Bağlantının oturması için kısa bir bekleme
+sleep 30s
+
+# --- 5. ADIM: SON KONTROL VE CLUSTER'I UYANDIRMA ---
+if mountpoint -q "$MOUNT_POINT"; then
+    echo "🎉 Rclone başarıyla bağlandı!"
+    echo "🚀 ADIM 6: Cluster ($CLUSTER_NAME) yeniden başlatılıyor..."
+    docker start "$CONTROL_PLANE"
+    echo "🌟 Aytu-Flix sistemi şimdi yayında!"
+else
+    echo "❌ HATA: Mount işlemi başarısız oldu!"
+    echo "🔒 Klasör Radarr'a karşı kilitleniyor (chmod 000)..."
+    chmod 000 "$MOUNT_POINT"
+    tail -n 10 "$LOG_FILE"
+    exit 1
+fi

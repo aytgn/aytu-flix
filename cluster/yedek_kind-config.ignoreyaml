@@ -16,5 +16,5 @@ nodes:
     hostPort: 443
     protocol: TCP
   extraMounts:
-  - hostPath: /home/aytu/jellyfin_project/storage
+  - hostPath: /home/aytu/aytu-flix/storage
     containerPath: /mnt/storage

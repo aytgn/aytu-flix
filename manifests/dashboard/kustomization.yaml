@@ -1,4 +1,4 @@
-# ~/jellyfin_project/manifests/dashboard/kustomization.yaml
+# ~/aytu-flix/manifests/dashboard/kustomization.yaml
 resources:
   - dashboard.yaml
   - service.yaml

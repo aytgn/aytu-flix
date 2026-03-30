@@ -1,4 +1,4 @@
 #AŞAĞIDAKI KOMUTLA APPLY YAPILIR
-kubectl apply -k ~/jellyfin_project/manifests/dashboard/
+kubectl apply -k ~/aytu-flix/manifests/dashboard/
 
 

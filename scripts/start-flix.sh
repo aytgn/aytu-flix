@@ -2,10 +2,19 @@
 
 # --- DEĞİŞKENLER ---
 CLUSTER_NAME="jelly-lab"
-MANIFEST_DIR="/home/aytu/jellyfin_project/manifests"
-CONFIG_PATH="/home/aytu/jellyfin_project/cluster/kind-config.yaml"
+MANIFEST_DIR="/home/aytu/aytu-flix/manifests"
+CONFIG_PATH="/home/aytu/aytu-flix/cluster/kind-config.yaml"
+MOUNT_POINT="/home/aytu/aytu-flix/storage"
 
 echo "🚀 Aytu-Flix Kontrol Kulesi başlatıldı..."
+
+# 🛡️ 0. KRİTİK GÜVENLİK KONTROLÜ: Rclone Mount Teyidi
+if ! mountpoint -q "$MOUNT_POINT"; then
+    echo "❌ HATA: Disk (Google Drive) henüz takılmamış!"
+    echo "🛡️ Güvenlik duvarı aktif: Disk olmadan cluster'ı ateşleyemem Aytu."
+    echo "👉 Önce 'bash mount_gdrive.sh' çalıştır veya servisin uyanmasını bekle."
+    exit 1
+fi
 
 # 1. Cluster var mı kontrol et
 if ! kind get clusters | grep -q "^$CLUSTER_NAME$"; then

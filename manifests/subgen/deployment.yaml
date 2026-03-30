@@ -4,6 +4,8 @@ metadata:
   name: subgen
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: subgen
@@ -24,6 +26,8 @@ spec:
           value: "1000"
         - name: TZ
           value: "Europe/Istanbul"
+        - name: DEBUG
+          value: "True"
         - name: CONCURRENT_TRANSCRIPTIONS
           value: "1"
         - name: WHISPER_THREADS
@@ -43,11 +47,15 @@ spec:
         - name: JELLYFIN_SERVER
           value: "http://jellyfin-service:8096/jellyfin"
         - name: JELLYFIN_TOKEN
-          value: "6c1bed94f67940e7ab669c1081a49631"
+          value: "d0725b345e574ab2bae88f3f9b92ae70"
         - name: DETECT_LANGUAGE_OFFSET
           value: "300"
         - name: DETECT_LANGUAGE_LENGTH
           value: "30"
+        - name: SKIP_IF_SUBTITLE_EXISTS
+          value: "True"
+        - name: APPEND_SUBGEN_TO_FILENAME
+          value: "False"
         resources:
           limits:
             cpu: "4"
@@ -58,14 +66,14 @@ spec:
         volumeMounts:
         - name: config-vol
           mountPath: /config
-          subPath: subgen           # Whisper modelleri ve ayarlar SSD'de (Hızlı)
+          subPath: subgen            # Whisper modelleri ve ayarlar SSD'de (Hızlı)
         - name: media-vol
-          mountPath: /data/media
+          mountPath: /data/media/adult
           subPath: media_data/library/adult # İşlenecek videolar GDrive'da
       volumes:
       - name: config-vol
         persistentVolumeClaim:
-          claimName: config-pvc     # Beyin: SSD üzerindeki modeller
+          claimName: config-pvc      # Beyin: SSD üzerindeki modeller
       - name: media-vol
         persistentVolumeClaim:
-          claimName: storage-pvc    # Kas: Buluttaki videolar
+          claimName: storage-pvc     # Kas: Buluttaki videolar

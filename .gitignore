@@ -1,9 +1,18 @@
-# 1. GÜVENLİK
-*.env
+# --- 1. Rclone ve Mount Klasörleri ---
+/storage/
+rclone.log
 
-storage/
-app_configs/
+# --- 2. App Configs Derinlik Sınırı ---
+# Uygulama klasörlerinin içindeki tüm alt klasörleri yoksay (logs, cache, MediaCover vb.)
+/app_configs/*/*/
 
-.DS_Store
-Thumbs.db
-Desktop.ini
+# --- 3. Veritabanları ve Çalışma Zamanı Dosyaları (Çok Önemli) ---
+# Uygulamaların canlı DB dosyaları saniyede bir değişir ve git reponu çöp eder
+*.db
+*.db-shm
+*.db-wal
+*.pid
+
+# --- 4. Medya ve İndirme Dosyaları ---
+# downloads klasörünün içindeki her şeyi dışla
+/app_configs/downloads/

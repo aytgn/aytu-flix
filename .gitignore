@@ -1,3 +1,6 @@
+# --- 0. env ---
+*.env
+
 # --- 1. Rclone ve Mount Klasörleri ---
 /storage/
 rclone.log

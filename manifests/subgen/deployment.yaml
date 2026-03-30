@@ -19,43 +19,9 @@ spec:
         image: mccloud/subgen:cpu
         ports:
         - containerPort: 9000
-        env:
-        - name: PUID
-          value: "1000"
-        - name: PGID
-          value: "1000"
-        - name: TZ
-          value: "Europe/Istanbul"
-        - name: DEBUG
-          value: "True"
-        - name: CONCURRENT_TRANSCRIPTIONS
-          value: "1"
-        - name: WHISPER_THREADS
-          value: "4"
-        - name: WHISPER_MODEL
-          value: "base"
-        - name: TRANSCRIBE_DEVICE
-          value: "cpu"
-        - name: WHISPER_VAD_FILTER
-          value: "True"
-        - name: WHISPER_BEAM_SIZE
-          value: "3"
-        - name: TRANSCRIBE_OR_TRANSLATE
-          value: "transcribe"
-        - name: APPEND_LANGUAGE_TO_FILENAME
-          value: "True"
-        - name: JELLYFIN_SERVER
-          value: "http://jellyfin-service:8096/jellyfin"
-        - name: JELLYFIN_TOKEN
-          value: "d0725b345e574ab2bae88f3f9b92ae70"
-        - name: DETECT_LANGUAGE_OFFSET
-          value: "300"
-        - name: DETECT_LANGUAGE_LENGTH
-          value: "30"
-        - name: SKIP_IF_SUBTITLE_EXISTS
-          value: "True"
-        - name: APPEND_SUBGEN_TO_FILENAME
-          value: "False"
+        envFrom:
+        - secretRef:
+            name: flix-secrets
         resources:
           limits:
             cpu: "4"

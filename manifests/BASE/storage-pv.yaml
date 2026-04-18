@@ -4,7 +4,7 @@ metadata:
   name: jellyfin-data-pv
 spec:
   capacity:
-    storage: 1Ti
+    storage: 2Ti
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
@@ -30,4 +30,4 @@ spec:
   storageClassName: local-storage
   resources:
     requests:
-      storage: 1Ti
+      storage: 2Ti
